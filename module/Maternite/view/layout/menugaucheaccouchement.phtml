@@ -1,0 +1,359 @@
+<style>
+#sideBareMenuGaucheFacturation{ visibility: hidden }
+
+#sideBareMenuGaucheFacturation{ min-width:200px; max-width: 430px;}
+</style>
+
+<script>
+$(window).load(function () {
+
+	$('#waitMenuGaucheFacturation').toggle(false);
+	$('#sideBareMenuGaucheFacturation').fadeIn().css({'visibility':'visible'});
+	 
+});
+</script>
+
+<div id="waitMenuGaucheFacturation" style="color: #cccccc; font-size: 13px;  margin-top: 80px;  margin-left: 60px;" > <span> Chargement ... </span> </div>
+
+
+<ul id="sideBareMenuGaucheFacturation">
+	<!-- MENU ***DOSSIER PATIENT*** -->
+	<li id="dossier_patient"><a href="">
+	    <span style="margin-left:0px; color: #48ce77; font-weight:bold; font-size:20px; font-family:Times New Roman;"> <img id="image" style="display: inline;" src='<?php echo $this->basePath().'/images_icons/plus-green1.png'?>' alt='Liste' /> Dossier patiente </span></a> </li>
+
+	<li id="plus_dossier_patient" style="background: #4a5765;" >
+
+	   <div style="margin-left:30px; height:40px; padding-top:20px;"><a href="<?php echo $this->basePath()."/accouchement/ajouter";?>"  >
+	       <span id="nouveau_style" style="margin-left:5px; color: white; font-size:15px; font-family:Times New Roman;"><img style="display: inline;" src='<?php echo $this->basePath().'/images_icons/dossier.PNG'?>' alt='Liste' /> Nouveau</span></a>
+	   </div>
+ 
+	  
+	   <div style="margin-left:30px; height:40px;"><a href="<?php echo $this->basePath()."/accouchement/liste-patient";?>">
+	       <img style="margin-left:5px; display: inline;" src='<?php echo $this->basePath().'/images_icons/liste.PNG'?>' alt='Liste' />
+	       <span id="liste_dossier_patient_style" style="font-size:15px; color: white; font-family:Times New Roman;">Liste </span></a>
+	   </div>
+	</li>
+
+
+<!-- MENU ***Admission*** -->
+<li id="admission"><a href="">
+<span style="margin-left:0px; color: #48ce77; font-weight:bold; font-size:20px; font-family:Times New Roman;"> <img id="image" style="display: inline;" src='<?php echo $this->basePath().'/images_icons/plus-green1.png'?>' alt='Liste' /> Admission Patiente </span></a> 
+</li>
+
+<li id="plus_admission" style="background: #4a5765;" >
+
+<div style="margin-left:30px; height:40px; padding-top:20px;"><a href="<?php echo $this->basePath()."/accouchement/admission-test";?>"  >
+   <span id="admission_style" style="margin-left:5px; color: white; font-size:15px; font-family:Times New Roman;"><img style="display: inline;" src='<?php echo $this->basePath().'/images_icons/dossier.PNG'?>' alt='Liste' /> Admission</span></a>
+</div>
+
+ <div style="margin-left:30px; height:40px;"><a href="<?php echo $this->basePath()."/accouchement/liste-patients-admis";?>">
+	       <img style="margin-left:5px; display: inline;" src='<?php echo $this->basePath().'/images_icons/liste.PNG'?>' alt='Liste' />
+	       <span id="liste_dossier_patient_style" style="font-size:15px; color: white; font-family:Times New Roman;">Liste des Admis</span></a>
+	   </div>
+
+
+</li>
+
+
+
+
+<!-- MENU ***Accouchement*** -->
+<li id="accouchement"><a href="">
+<span style="margin-left:0px; color: #48ce77; font-weight:bold; font-size:20px; font-family:Times New Roman;"> <img id="image" style="display: inline;" src='<?php echo $this->basePath().'/images_icons/plus-green1.png'?>' alt='Liste' /> Accouchement </span></a> 
+</li>
+
+<li id="plus_accouchement" style="background: #4a5765;" >
+
+<div style="margin-left:30px; height:40px; padding-top:20px;"><a href="<?php echo $this->basePath()."/accouchement/accoucher";?>"  >
+   <span id="admission_style" style="margin-left:5px; color: white; font-size:15px; font-family:Times New Roman;"><img style="display: inline;" src='<?php echo $this->basePath().'/images_icons/dossier.PNG'?>' alt='Liste' /> En Cours...</span></a>
+</div>
+
+</li>
+
+
+
+<!-- MENU ***Hospitalisation*** -->
+<li id="hospi"><a href="">
+<span style="margin-left:0px; color: #48ce77; font-weight:bold; font-size:20px; font-family:Times New Roman;"> <img id="image" style="display: inline;" src='<?php echo $this->basePath().'/images_icons/plus-green1.png'?>' alt='Liste' /> Hospitalisation </span></a> 
+</li>
+
+<li id="plus_hospi" style="background: #4a5765;" >
+
+<div style="margin-left:30px; height:40px; padding-top:20px;"><a href="<?php echo $this->basePath()."/consultation/en-cours";?>"  >
+   <span id="admission_style" style="margin-left:5px; color: white; font-size:15px; font-family:Times New Roman;"><img style="display: inline;" src='<?php echo $this->basePath().'/images_icons/dossier.PNG'?>' alt='Liste' /> En Cours...</span></a>
+</div>
+
+</li>
+
+
+	
+</ul>
+
+
+<script>
+//PARTOGRAMME*******************************************************************************************************************************
+
+function dep_partogramme1(){
+	$('#partogramme').click(function(){
+		$("#partogramme").replaceWith("<li id='partogramme'><a href=''><span style='margin-left:0px; color: #48ce77; font-weight:bold; font-size:20px; font-family:Times New Roman;'> <img style='display: inline;' src='<?php echo $this->basePath().'/images_icons/plus-green1.png'?>' alt='Liste' /> Partogramme </span></a></li>");
+		dep_partogramme2();
+	    $('#plus_partogramme').animate({
+	        height : 'toggle'                            
+	    },1000);
+	 return false;
+	});
+}
+
+function dep_partogramme2(){
+	$('#partogramme').click(function(){
+		$("#partogramme").replaceWith("<li id='partogramme' style='background:#4a5765;'><a href=''><span style='margin-left:0px; color: #ffffff; font-weight:bold; font-size:20px; font-family:Times New Roman;'> <img style='display: inline;' src=   '<?php echo $this->basePath().'/images_icons/moin-green2.png'?>' alt='Liste' /> Partogramme </span></a></li>");
+		dep_dossier_patient1();
+	    $('#plus_partogramme').animate({
+	        height : 'toggle'
+	    },1000);
+	 return false;
+	});
+}
+
+$('#plus_partogramme').toggle(false);
+$('#partogramme').click(function(){
+	$("#partogramme").replaceWith("<li id='partogramme' style='background:#4a5765;'><a href=''><span style='margin-left:0px; color: #ffffff; font-weight:bold; font-size:20px; font-family:Times New Roman;'> <img style='display: inline;' src=   '<?php echo $this->basePath().'/images_icons/liste.PNG'?>' alt='Liste' /> Partogramme </span></a></li>");
+	dep_partogramme1();
+$('#plus_partogramme').animate({
+height : 'toggle'
+},1000);
+return false;
+});
+
+
+
+//*******************************************************************************************************************************
+//DECES
+
+
+
+
+
+
+
+//*******************************************************************************************************************************
+//ADMISSION
+
+
+
+
+
+function dep_admission1(){
+	$('#admission').click(function(){
+		$("#admission").replaceWith("<li id='admission'><a href=''><span style='margin-left:0px; color: #48ce77; font-weight:bold; font-size:20px; font-family:Times New Roman;'> <img style='display: inline;' src=   '<?php echo $this->basePath().'/images_icons/plus-green1.png'?>' alt='Liste' /> Admission Patiente </span></a></li>");
+		dep_admission2();
+	    $('#plus_admission').animate({
+	        height : 'toggle'
+	    },1000);
+	 return false;
+	});
+}
+
+function dep_admission2(){
+	$('#admission').click(function(){
+		$("#admission").replaceWith("<li id='admission' style='background:#4a5765;'><a href=''><span style='margin-left:0px; color: #ffffff; font-weight:bold; font-size:20px; font-family:Times New Roman;'> <img style='display: inline;' src=   '<?php echo $this->basePath().'/images_icons/moin-green2.png'?>' alt='Liste' /> Admission Patiente </span></a></li>");
+		dep_admission1();
+	    $('#plus_admission').animate({
+	        height : 'toggle'
+	    },1000);
+	 return false;
+	});
+}
+
+$('#plus_admission').toggle(false);
+$('#admission').click(function(){
+	$("#admission").replaceWith("<li id='admission' style='background:#4a5765;'><a href=''><span style='margin-left:0px; color: #ffffff; font-weight:bold; font-size:20px; font-family:Times New Roman;'> <img style='display: inline;' src=   '<?php echo $this->basePath().'/images_icons/moin-green2.png'?>' alt='Liste' /> Admission Patiente</span></a></li>");
+	dep_admission1();
+$('#plus_admission').animate({
+    height : 'toggle'
+},1000);
+return false;
+});
+
+
+
+
+function dep_accouchement1(){
+	$('#accouchement').click(function(){
+		$("#accouchement").replaceWith("<li id='accouchement'><a href=''><span style='margin-left:0px; color: #48ce77; font-weight:bold; font-size:20px; font-family:Times New Roman;'> <img style='display: inline;' src=   '<?php echo $this->basePath().'/images_icons/plus-green1.png'?>' alt='Liste' /> Accouchement </span></a></li>");
+		dep_admission2();
+	    $('#plus_accouchement').animate({
+	        height : 'toggle'
+	    },1000);
+	 return false;
+	});
+}
+
+function dep_accouchement2(){
+	$('#accouchement').click(function(){
+		$("#accouchement").replaceWith("<li id='accouchement' style='background:#4a5765;'><a href=''><span style='margin-left:0px; color: #ffffff; font-weight:bold; font-size:20px; font-family:Times New Roman;'> <img style='display: inline;' src=   '<?php echo $this->basePath().'/images_icons/moin-green2.png'?>' alt='Liste' /> Accouchement </span></a></li>");
+		dep_accouchement1();
+	    $('#plus_accouchement').animate({
+	        height : 'toggle'
+	    },1000);
+	 return false;
+	});
+}
+
+$('#plus_accouchement').toggle(false);
+$('#accouchement').click(function(){
+	$("#accouchement").replaceWith("<li id='accouchement' style='background:#4a5765;'><a href=''><span style='margin-left:0px; color: #ffffff; font-weight:bold; font-size:20px; font-family:Times New Roman;'> <img style='display: inline;' src=   '<?php echo $this->basePath().'/images_icons/moin-green2.png'?>' alt='Liste' /> Accouchement</span></a></li>");
+	dep_accouchement1();
+$('#plus_accouchement').animate({
+    height : 'toggle'
+},1000);
+return false;
+});
+
+
+//*******************************************************************************************************************************
+//ACCOUCHEMENT
+
+
+
+function dep_hospi1(){
+	$('#hospi').click(function(){
+		$("#hospi").replaceWith("<li id='hospi'><a href=''><span style='margin-left:0px; color: #48ce77; font-weight:bold; font-size:20px; font-family:Times New Roman;'> <img style='display: inline;' src=   '<?php echo $this->basePath().'/images_icons/plus-green1.png'?>' alt='Liste' /> Hospitalisation </span></a></li>");
+		dep_hospi2();
+	    $('#plus_hospi').animate({
+	        height : 'toggle'
+	    },1000);
+	 return false;
+	});
+}
+
+function dep_hospi2(){
+	$('#hospi').click(function(){
+		$("#hospi").replaceWith("<li id='hospi' style='background:#4a5765;'><a href=''><span style='margin-left:0px; color: #ffffff; font-weight:bold; font-size:20px; font-family:Times New Roman;'> <img style='display: inline;' src=   '<?php echo $this->basePath().'/images_icons/moin-green2.png'?>' alt='Liste' /> Hospitalisation </span></a></li>");
+		dep_hospi1();
+	    $('#plus_hospi').animate({
+	        height : 'toggle'
+	    },1000);
+	 return false;
+	});
+}
+
+$('#plus_hospi').toggle(false);
+$('#hospi').click(function(){
+	$("#hospi").replaceWith("<li id='hospi' style='background:#4a5765;'><a href=''><span style='margin-left:0px; color: #ffffff; font-weight:bold; font-size:20px; font-family:Times New Roman;'> <img style='display: inline;' src='<?php echo $this->basePath().'/images_icons/moin-green2.png'?>' alt='Liste' /> Hospitalisation</span></a></li>");
+	dep_hospi1();
+$('#plus_hospi').animate({
+    height : 'toggle'
+},1000);
+return false;
+});
+
+
+
+//*******************************************************************************************************************************
+//DOSSIER PATIENT
+function dep_dossier_patient1(){
+	$('#dossier_patient').click(function(){
+		$("#dossier_patient").replaceWith("<li id='dossier_patient'><a href=''><span style='margin-left:0px; color: #48ce77; font-weight:bold; font-size:20px; font-family:Times New Roman;'> <img style='display: inline;' src='<?php echo $this->basePath().'/images_icons/plus-green1.png'?>' alt='Liste' /> Dossier Patiente </span></a></li>");
+		dep_dossier_patient2();
+	    $('#plus_dossier_patient').animate({
+	        height : 'toggle'
+	    },1000);
+	 return false;
+	});
+}
+
+function dep_dossier_patient2(){
+	$('#dossier_patient').click(function(){
+		$("#dossier_patient").replaceWith("<li id='dossier_patient' style='background:#4a5765;'><a href=''><span style='margin-left:0px; color: #ffffff; font-weight:bold; font-size:20px; font-family:Times New Roman;'> <img style='display: inline;' src='<?php echo $this->basePath().'/images_icons/moin-green2.png'?>' alt='Liste' /> Dossier Patiente </span></a></li>");
+		dep_dossier_patient1();
+	    $('#plus_dossier_patient').animate({
+	        height : 'toggle'
+	    },1000);
+	 return false;
+	});
+}
+
+$('#plus_dossier_patient').toggle(false);
+$('#dossier_patient').click(function(){
+	$("#dossier_patient").replaceWith("<li id='dossier_patient' style='background:#4a5765;'><a href=''><span style='margin-left:0px; color: #ffffff; font-weight:bold; font-size:20px; font-family:Times New Roman;'> <img style='display: inline;' src='<?php echo $this->basePath().'/images_icons/moin-green2.png'?>' alt='Liste' /> Dossier Patiente </span></a></li>");
+	dep_dossier_patient1();
+$('#plus_dossier_patient').animate({
+height : 'toggle'
+},1000);
+return false;
+});
+//*******************************************************************************
+//DOSSIER ENFANT
+
+
+
+function dep_dossier_enfant1(){
+	$('#dossier_enfant').click(function(){
+		$("#dossier_enfant").replaceWith("<li id='dossier_enfant'><a href=''><span style='margin-left:0px; color: #48ce77; font-weight:bold; font-size:20px; font-family:Times New Roman;'> <img style='display: inline;' src='<?php echo $this->basePath().'/images_icons/moin-green2.png'?>' alt='Liste' /> Dossier Enfant </span></a></li>");
+		dep_dossier_enfant2();
+	    $('#plus_dossier_enfant').animate({
+	        height : 'toggle'
+	    },1000);
+	 return false;
+	});
+}
+
+function dep_dossier_enfant2(){
+	$('#dossier_enfant').click(function(){
+		$("#dossier_enfant").replaceWith("<li id='dossier_enfant' style='background:#4a5765;'><a href=''><span style='margin-left:0px; color: #ffffff; font-weight:bold; font-size:20px; font-family:Times New Roman;'> <img style='display: inline;' src='<?php echo $this->basePath().'/images_icons/moin-green2.png'?>' alt='Liste' /> Dossier Enfant </span></a></li>");
+		dep_dossier_enfant1();
+	    $('#plus_dossier_enfant').animate({
+	        height : 'toggle'
+	    },1000);
+	 return false;
+	});
+}
+
+$('#plus_dossier_enfant').toggle(false);
+$('#dossier_enfant').click(function(){
+	$("#dossier_enfant").replaceWith("<li id='dossier_enfant' style='background:#4a5765;'><a href=''><span style='margin-left:0px; color: #ffffff; font-weight:bold; font-size:20px; font-family:Times New Roman;'> <img style='display: inline;' src='<?php echo $this->basePath().'/images_icons/moin-green2.png'?>' alt='Liste' /> Dossier Enfant </span></a></li>");
+	dep_dossier_enfant1();
+$('#plus_dossier_enfant').animate({
+height : 'toggle'
+},1000);
+return false;
+});
+
+
+
+
+//SUITE DE COUCHES
+function dep_suite_de_couche1(){
+	$('#suite_de_couche').click(function(){
+		$("#suite_de_couche").replaceWith("<li id='suite_de_couche'><a href=''><span style='margin-left:0px; color: #48ce77; font-weight:bold; font-size:20px; font-family:Times New Roman;'> <img style='display: inline;' src='<?php echo $this->basePath().'/images_icons/plus-green1.png'?>' alt='Liste' /> Suites de Couches </span></a></li>");
+		dep_suite_de_couche2();
+	    $('#plus_suite_de_couche').animate({
+	        height : 'toggle'
+	    },1000);
+	 return false;
+	});
+}
+
+function dep_suite_de_couche2(){
+	$('#suite_de_couche').click(function(){
+		$("#suite_de_couche").replaceWith("<li id='suite_de_couche' style='background:#4a5765;'><a href=''><span style='margin-left:0px; color: #ffffff; font-weight:bold; font-size:20px; font-family:Times New Roman;'> <img style='display: inline;' src='<?php echo $this->basePath().'/images_icons/moin-green2.png'?>' alt='Liste' /> Suites de Couches </span></a></li>");
+		dep_suite_de_couche1();
+	    $('#plus_suite_de_couche').animate({
+	        height : 'toggle'
+	    },1000);
+	 return false;
+	});
+}
+
+$('#plus_suite_de_couche').toggle(false);
+$('#suite_de_couche').click(function(){
+	$("#suite_de_couche").replaceWith("<li id='suite_de_couche' style='background:#4a5765;'><a href=''><span style='margin-left:0px; color: #ffffff; font-weight:bold; font-size:20px; font-family:Times New Roman;'> <img style='display: inline;' src='<?php echo $this->basePath().'/images_icons/moin-green2.png'?>' alt='Liste' /> Suites de Couches </span></a></li>");
+	dep_suite_de_couche1();
+$('#plus_suite_de_couche').animate({
+height : 'toggle'
+},1000);
+return false;
+});
+</script>
+
