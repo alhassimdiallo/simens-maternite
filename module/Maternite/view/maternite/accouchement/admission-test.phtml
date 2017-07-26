@@ -150,22 +150,22 @@ initialisation();
 		               <!--  <div id='motifsAdmissionConstanteClick' class='tabTitle'>TYPE D'
 			ADMISSION </div> -->
 		                  
-		                <tr>
+		             
+		         <tr>
 
 	                       <td class=""  style="width: 33%; height:50px;" >
-		                   <div  id= "BUcheckbox" style= "width:33%;" >
-		                   <span style="margin-right: 10%;"><span style="margin-right: 20%;"></span>
+		                   <div  id= "BUcheckbox" style= "width:23%;" >
+		                   <span style="margin-right: 10%;"><span style="margin-right: 10%;"></span>
 		                   </span></div> 
 		                  
 		                   <div ><?php echo $this->formRow($form->get('motif_ad'));?></div>
 		              </td >
 		               
-		                   <td   class=" Motif"  style='width: 33%;'><?php echo $this->formRow($form->get('motif'));?></td>
-		                   <td class=" Motif" style='width: 33%;'><?php echo $this->formRow($form->get('service_origine'));?></td>
-		                             
+		                   <td   class=" MotifAdmission"  style='width: 33%;'><?php echo $this->formRow($form->get('motif'));?></td>
+		                   <td   class=" Reference" id="ref" style='width: 33%;'><?php echo $this->formRow($form->get('motif_reference'));?></td>
+		                   <td class= " MotifAdmission" style='width: 33%;'><?php echo $this->formRow($form->get('service_origine'));?></td>
+		                   <td class= " reference" style='width: 33%;'><?php echo $this->formRow($form->get('service_origine_ref'));?></td>          
 		              </tr> 
-		      
-		               
 		             
 		          
 		              </table>
@@ -176,11 +176,31 @@ initialisation();
 		             
 		              </table>
 		      
-		      
+		     
 		       <div style="float:left; width:5%;">
 		       </div>
 		       <script>
-             
+		       $('.MotifAdmission').toggle(false);
+		       $('.Reference').toggle(false);
+		       function getMotif(val){ 
+		       //	alert(val);
+		       	if(val==1){
+		       		$("#motif").html("Motif d\'admission");
+		       		$('.MotifAdmission').fadeOut();
+		       		$('.Reference').fadeOut();
+		       	}else if (val==2){
+		       		$("#motif span span").html("");
+		       		$('.MotifAdmission').fadeIn();
+		       		$('.Reference').fadeOut();
+		       	}	
+		       	else {
+		       		$("#motif span span").html("");
+		       		$('.MotifAdmission').fadeOut();
+		       		$('.Reference').fadeIn();
+		       	}
+		       }
+
+		       getExamenMaterniteDonnee3($('#motif_ad').val());
              /****** MASK DE SAISIE ********/
           	 maskSaisie();
             </script>

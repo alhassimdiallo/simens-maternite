@@ -17,27 +17,42 @@ class ReferenceTable {
 		
 		//var_dump('test');exit();
 	}
-// public function getReference($id_patient) {
-// 		$adapter = $this->tableGateway->getAdapter ();
-// 		$sql = new Sql ( $adapter );
-// 		$select = $sql->select ();
-// 		$select->columns ( array (
-// 				'*' 
-// 		) );
-// 		$select->from ( array (
-// 				'ref' => 'reference' 
-// 		) );
-// 		$select->where ( array (
-// 				'ref.id_patient' => $id_patient 
-// 		) );
-// 		$select->order ( 'ref.id_reference ASC' );
-// 		$stat = $sql->prepareStatementForSqlObject ( $select );
-// 		$result = $stat->execute ()->current();
-		
-// 		return $result;
-// 	}
+public function getReference($id_patient) {
+		$adapter = $this->tableGateway->getAdapter ();
+		$sql = new Sql ( $adapter );
+		$select = $sql->select ();
+		$select->columns ( array (
+				'*'
+		) );
+		$select->from ( array (
+				'ref' => 'reference'
+		) );
+		$select->where ( array (
+				'ref.id_patient' => $id_patient
+		) );
+		$select->order ( 'ref.id_reference ASC' );
+		$stat = $sql->prepareStatementForSqlObject ( $select );
+		$result = $stat->execute ()->current();
 	
-
+		return $result;
+	
+	}
+	
+	public function getRef($id_patient) {
+		$db = $this->tableGateway->getAdapter();
+		$sql = new Sql($db);
+		$sQuery = $sql->select()
+		->from(array('ref' => 'reference'))
+		->columns( array( '*' ))
+		->join(array('a' => 'admission'), 'a.id_reference = ref.id_reference' , array('*'))
+		//->join(array('a' => 'admission'), 'a.id_patient = pat.id_personne' , array('id_admission'))
+		//->join(array('ant' => 'antecedent_type_1'), 'ant.id_patient = pat.id_personne' , array('*'))
+		->where(array('ref.id_patient' => $id_patient));
+		$stat = $sql->prepareStatementForSqlObject($sQuery);
+		$resultat = $stat->execute()->current();
+		//var_dump($resultat);exit();
+		return $resultat;
+	}
 	public function addReference($donnees) {
 		
 		$Control = new DateHelper();
@@ -46,9 +61,10 @@ class ReferenceTable {
 // 		) );
 		
 		$datadonnee = array (
-				//'id_patient' => $donnees ['id_patient'],
-				'motif_reference' => $donnees ['motif'],
-				'service_origine_ref' => $donnees ['service_origine'],
+				'id_patient' => $donnees ['id_patient'],
+				'id_admission' => $donnees ['id_admission'],
+				'motif_reference' => $donnees ['motif_reference'],
+				'service_origine_ref' => $donnees ['service_origine_ref'],
 		
 				
 		);
@@ -60,20 +76,7 @@ class ReferenceTable {
 	}
 	public function saveEvacuation($infoEvacuation)
 	{
-		//if(!$this->getEvacuation($infoEvacuation)){
-			if($infoEvacuation['evacue_de'] && $infoEvacuation['motif_evac']
-			&& $infoEvacuation['service_origine']
-			&& $infoEvacuation['evacue_vers']
-			&& $infoEvacuation['motif_ev_vers']
-			&& $infoEvacuation['service_acceuil']
-			&& $infoEvacuation['reference']
-			&& $infoEvacuation['motif_ref']
-			&& $infoEvacuation['refere_de']
-
-){
-				
-				$this->tableGateway->insert($infoEvacuation);
-			}
+	
 		//}
 	}
 
@@ -107,6 +110,21 @@ class ReferenceTable {
 			//var_dump("test"); exit();
 			//var_dump($dataac);exit();
 			//var_dump($dataaccouchement);exit();
+	}
+	public function getRefer($id_patient) {
+		$db = $this->tableGateway->getAdapter();
+		$sql = new Sql($db);
+		$sQuery = $sql->select()
+		->from(array('ref' => 'reference'))
+		->columns( array( '*' ))
+		//->join(array('a' => 'admission'), 'a.id_evacuation = eva.id_evacuation' , array('*'))
+		->join(array('a' => 'admission'), 'a.id_admission = ref.id_admission' , array('id_admission'))
+		//->join(array('ant' => 'antecedent_type_1'), 'ant.id_patient = pat.id_personne' , array('*'))
+		->where(array('a.id_patient' => $id_patient));
+		$stat = $sql->prepareStatementForSqlObject($sQuery);
+		$resultat = $stat->execute()->current();
+		//var_dump($resultat);exit();
+		return $resultat;
 	}
 	
 

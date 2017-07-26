@@ -60,11 +60,12 @@ class AdmissionForm extends Form{
 				'type' => 'Select',
 				'options' => array (
 						'label' => iconv('ISO-8859-1', 'UTF-8','Motif d\'admission'),
-						'value_options' => array (
-								'Normal' => 'Normal',
-								'Evacuation' => 'Evacuation',
-								'Reference' => 'Reference',
-						)
+// 						'value_options' => array (
+// 								'Normal' => 'Normal',
+// 								'Evacuation' => 'Evacuation',
+// 								'Reference' => 'Reference',
+								
+// 						)
 				),
 				'attributes' => array (
 						'registerInArrrayValidator' => true,
@@ -82,13 +83,26 @@ class AdmissionForm extends Form{
 				'name' => 'motif',
 				'type' => 'Text',
 				'options' => array (
-						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Motif d\'evacuation ou de reference' )
+						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Motif d\'evacuation ' )
 				),
 				'attributes' => array (
 						//'readonly' => 'readonly',
 						'id' => 'motif'
 				)
 		) );
+		
+		$this->add ( array (
+				'name' => 'motif_reference',
+				'type' => 'Text',
+				'options' => array (
+						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Motif  de reference' )
+				),
+				'attributes' => array (
+						//'readonly' => 'readonly',
+						'id' => 'motif_reference'
+				)
+		) );
+		
 		
 		$this->add ( array (
 				'name' => 'service_origine',
@@ -102,7 +116,17 @@ class AdmissionForm extends Form{
 				)
 		) );
 		
-		
+		$this->add ( array (
+				'name' => 'service_origine_ref',
+				'type' => 'Text',
+				'options' => array (
+						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Service d\'origine' )
+				),
+				'attributes' => array (
+						//'readonly' => 'readonly',
+						'id' => 'service_origine_ref'
+				)
+		) );
 	
 		$this->add ( array (
 				'name' => 'geste', 

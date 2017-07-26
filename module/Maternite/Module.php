@@ -65,6 +65,8 @@ use Maternite\Model\Accouchement;
 use Maternite\Model\AccouchementTable;
 use Maternite\Model\TypeAccouchement;
 use Maternite\Model\TypeAccouchementTable;
+use Maternite\Model\TypeAdmission;
+use Maternite\Model\TypeAdmissionTable;
 use Maternite\Model\Naissance;
 use Maternite\Model\NaissanceTable;
 use Maternite\Model\Evacuation;
@@ -272,7 +274,19 @@ class Module implements AutoloaderProviderInterface {
 						
 						},
 						
+						'Maternite\Model\TypeAdmissionTable' => function ($sm) {
+							$tableGateway = $sm->get( 'TypeAdmissionTableGateway' );
+							$table = new TypeAdmissionTable($tableGateway);
+							return $table;
 						
+						},
+						'TypeAdmissionTableGateway' => function ($sm) {
+							$dbAdapter = $sm->get ( 'Zend\Db\Adapter\Adapter' );
+							$resultSetPrototype = new ResultSet ();
+							$resultSetPrototype->setArrayObjectPrototype (new TypeAdmission());
+							return new TableGateway ( 'type_admission', $dbAdapter, null, $resultSetPrototype );
+						
+						},
 						
 						'Maternite\Model\NaissanceTable' => function ($sm) {
 							$tableGateway = $sm->get( 'NaissanceTableGateway' );

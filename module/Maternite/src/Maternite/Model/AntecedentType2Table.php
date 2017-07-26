@@ -42,9 +42,10 @@ class AntecedentType2Table {
         			'id_patient' => $donnees ['id_patient'],
         			'dystocie' => $donnees ['dystocie'],
         			'eclampsie' => $donnees ['eclampsie'],
-        			'cycle' => $donnees ['cycle'],
+        			'cycle' => $donnees ['regularite'],
         			'duree_cycle' => $donnees ['duree_cycle'],
-        			'regularite' => $donnees ['regularite'],
+        			'quantite_regle' => $donnees ['quantite_regle'],
+        			'nb_garniture_jr' => $donnees ['nb_garniture_jr'],
         			'note_dystocie' => $donnees ['note_dystocie'],
         			'note_eclampsie' => $donnees ['note_eclampsie'],
         			

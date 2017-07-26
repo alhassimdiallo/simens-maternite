@@ -58,14 +58,21 @@ class AntecedentType1Table {
     			'note_mort_ne' => $donnees ['note_mort_ne'],
     			'cesar' => $donnees ['cesar'],
     			'note_cesar' => $donnees ['note_cesar'],
+    			'groupe_sanguin' => $donnees ['groupe_sanguins'],
+    			'rhesus' => $donnees ['rhesus'],
+    			'note_gs' => $donnees ['note_gs'],
+    			'test_emmel' => $donnees ['test_emmel'],
+    			'profil_emmel' => $donnees ['profil_emmel'],
+    			'note_emmel' => $donnees ['note_emmel'],
+    			'note_autre_em' => $donnees ['note_autre_em'],
     
     	);
     
-    	if(!$result->current()){
-    		$this->tableGateway->insert($datadonnee);
-    	}else{
-    		$this->tableGateway->update($datadonnee, array('id_patient'=> $donnees['id_patient']));
-    	}
+//     	if(!$result->current()){
+     		$this->tableGateway->insert($datadonnee);
+     	//}else{
+    		//$this->tableGateway->update($datadonnee, array('id_patient'=> $donnees['id_patient']));
+    	//}
     	//var_dump($datadonnee); exit();
     	//$this->tableGateway->insert ( $datadonnee );
     }

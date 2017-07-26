@@ -888,7 +888,7 @@ $("#terminer2, #terminer3").click(function () {
     donnees['examen_maternite_donnee8'] = $("#examen_maternite_donnee8").val();
     donnees['examen_maternite_donnee9'] = $("#examen_maternite_donnee9").val();
     donnees['examen_maternite_donnee10'] = $("#examen_maternite_donnee10").val();
-    
+    donnees['examen_maternite_donnee11'] = $("#examen_maternite_donnee11").val(); 
     donnees['note_tv'] = $("#note_tv").val();
     donnees['note_hu'] = $("#note_hu").val();
     donnees['note_bdc'] = $("#note_bdc").val();
@@ -1034,14 +1034,22 @@ $("#terminer2, #terminer3").click(function () {
     donnees['note_mort_ne'] = $("#note_mort_ne").val();
     donnees['cesar'] = $("#cesar").val();
     donnees['note_cesar'] = $("#note_cesar").val();
-  
+    donnees['groupe_sanguins'] = $("#groupe_sanguins").val();
+    donnees['rhesus'] = $("#rhesus").val();
+    donnees['note_gs'] = $("#note_gs").val();
+    donnees['test_emmel'] = $("#test_emmel").val();
+    donnees['profil_emmel'] = $("#profil_emmel").val();
+    donnees['note_emmel'] = $("#note_emmel").val();
+    donnees['note_autre_em'] = $("#note_autre_em").val();
     //Antecedent type 2
     
     donnees['dystocie'] = $("#dystocie").val();
     donnees['note_dystocie'] = $("#note_dystocie").val();
     donnees['eclampsie'] = $("#eclampsie").val();
     donnees['note_eclampsie'] = $("#note_eclampsie").val();
-    donnees['cycle'] = $("#cycle").val();
+    donnees['cycle'] = $("#regularite").val();
+    donnees['quantite_regle'] = $("#quantite_regle").val();
+    donnees['nb_garniture_jr'] = $("#nb_garniture_jr").val();
     donnees['note_cycle'] = $("#note_cycle").val();
     donnees['duree_cycle'] = $("#duree_cycle").val();
     donnees['regularite'] = $("#regularite").val();
@@ -1105,15 +1113,16 @@ $("#terminer2, #terminer3").click(function () {
     //Evacuation et Reference
     //**********--EVACUATION et REFERENCE-********
 
-    donnees['evacue_de'] = $("#evacue_de").val();
-    donnees['motif_evac'] = $("#motif_evac").val();
+    donnees['motif_ad'] = $("#motif_ad").val();
+    donnees['type_ad'] = $("#type_ad").val();
+    donnees['motif'] = $("#motif").val();
     donnees['service_origine'] = $("#service_origine").val();
-    donnees['evacue_vers'] = $("#evacue_vers").val();
-    donnees['motif_ev_vers'] = $("#motif_ev_vers").val();
-    donnees['service_acceuil_ev'] = $("#service_acceuil_ev").val();
-    donnees['reference'] = $("#reference").val();
-    donnees['motif_ref'] = $("#motif_ref").val();
-    donnees['refere_de'] = $("#refere_de").val();
+//    donnees['evacue_vers'] = $("#evacue_vers").val();
+//    donnees['motif_ev_vers'] = $("#motif_ev_vers").val();
+//    donnees['service_acceuil_ev'] = $("#service_acceuil_ev").val();
+//    donnees['reference'] = $("#reference").val();
+//    donnees['motif_ref'] = $("#motif_ref").val();
+//    donnees['refere_de'] = $("#refere_de").val();
     
     //Recuperer les donnees sur les bandelettes urinaires
     //Recuperer les donnees sur les bandelettes urinaires
@@ -2799,67 +2808,6 @@ function getExamenMaterniteDonnee5(val){
 getExamenMaterniteDonnee5($('#examen_maternite_donnee5').val());
 
 
-
-
-
-
-
-//evacuation
-
-$('.EvacueDe').toggle(false);
-function getEvacueDe(val){ 
-	
-	if(val==1){
-		$("#evacueDe").html("Evacue");
-		$('.EvacueDe').fadeIn();
-	}else{
-		$("#evacueDe span span").html("");
-		$('.EvacueDe').fadeOut();
-	}	
-}
-
-getEvacueDe($('#evacue_de').val());
-
-
-
-
-
-//evacuationCHRSL
-
-$('.EvacueVers').toggle(false);
-function getEvacueVers(val){ 
-	
-	if(val==1){
-		$("#evacueVers").html("Evacue vers");
-		$('.EvacueVers').fadeIn();
-	}else{
-		$("#evacueVers span span").html("");
-		$('.EvacueVers').fadeOut();
-	}	
-}
-
-getEvacueVers($('#evacue_vers').val());
-
-
-
-
-//REFERENCE
-$('.Reference').toggle(false);
-function getReference(val){ 
-	
-	if(val==1){
-		$("#reference").html("Reference");
-		$('.Reference').fadeIn();
-	}else{
-		$("#reference span span").html("");
-		$('.Reference').fadeOut();
-	}	
-}
-
-getReference($('#reference').val());
-
-
-
 $('.BbAttendu').toggle(false);
 function getBbAttendu(val){ 
 	
@@ -2873,6 +2821,99 @@ function getBbAttendu(val){
 }
 
 getBbAttendu($('#bb_attendu').val());
+
+
+$('.Test').toggle(false);
+function getTest(val){ 
+	
+	if(val=='+'){
+		$("#test").html("Test emmel");
+		$('.Test').fadeIn();
+	}else{
+		$("#test span span").html("");
+		$('.Test').fadeOut();
+		$('.Profil').fadeOut();
+	}	
+}
+
+getTest($('#test_emmel').val());
+
+
+$('.Profil').toggle(false);
+function getProfil(val){ 
+	
+	if(val=='Autre'){
+		$("#profil").html("Profil");
+		$('.Profil').fadeIn();
+	}else{
+		$("#profil span span").html("");
+		$('.Profil').fadeOut();
+	}	
+}
+
+getProfil($('#profil_emmel').val());
+
+
+
+
+
+
+
+getCycle($('#regularite').val());
+//pour quantite
+
+$('.Quantite').toggle(false);
+function getQuantite(val){ 
+	
+	if(val=='Abondante'){
+		$("#quantite").html("Quantite Regle");
+		$('.Quantite').fadeIn();
+	}else{
+		$("#quantite span span").html("");
+		$('.Quantite').fadeOut();
+	}	
+}
+
+getQuantite($('#quantite_regle').val());
+//pour cycle
+$('.Cycle').toggle(false);
+function getCycle(val){ 
+	
+	if(val=='Irregulier'){
+		$("#cycle").html("Cycle");
+		$('.Cycle').fadeIn();
+	}else{
+		$("#cycle span span").html("");
+		$('.Cycle').fadeOut();
+		$('.Quantite').fadeOut();
+	}	
+}
+
+
+
+
+
+
+
+
+$('.MotifAdmission').toggle(false);
+function getTypeAd(val){ 
+	alert(val);
+	if(val=='Normal'){
+		$("#motif").html("Motif d\'admission");
+		$('.MotifAdmission').fadeOut();
+		
+	}else {
+		$("#motif span span").html("");
+		$('.MotifAdmission').fadeIn();
+
+	}	
+	
+}
+
+
+
+
 
 
 

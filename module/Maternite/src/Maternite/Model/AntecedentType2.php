@@ -9,8 +9,8 @@ class AntecedentType2 {
 	public $eclampsie;
 	public $cycle;
 	public $duree_cycle;
-	public $regularite;
-
+	public $quantite_regle;
+	public $nb_garniture_jr;
 	public $note_eclampsie;
 	public $note_dystocie;
 	public $note_cycle;
@@ -26,9 +26,10 @@ class AntecedentType2 {
 		$this->dystocie = (! empty ( $data ['dystocie'] )) ? $data ['dystocie'] : null;
 		$this->eclampsie = (! empty ( $data ['eclampsie'] )) ? $data ['eclampsie'] : null;
 		$this->duree_cycle = (! empty ( $data ['duree_cycle'] )) ? $data ['duree_cycle'] : null;
-		$this->regularite = (! empty ( $data ['regularite'] )) ? $data ['regularite'] : null;
+		$this->cycle = (! empty ( $data ['cycle'] )) ? $data ['cycle'] : null;
+		$this->quantite_regle = (! empty ( $data ['quantite_regle'] )) ? $data ['quantite_regle'] : null;
 		$this->autre = (! empty ( $data ['autre'] )) ? $data ['autre'] : null;
-		//$this->note_mort_ne = (! empty ( $data ['note_mort_ne'] )) ? $data ['note_mort_ne'] : null;
+		$this->nb_garniture_jr = (! empty ( $data ['nb_garniture_jr'] )) ? $data ['nb_garniture_jr'] : null;
 		$this->note_dystocie = (! empty ( $data ['note_dystocie'] )) ? $data ['note_dystocie'] : null;
 		$this->note_eclampsie = (! empty ( $data ['note_eclampsie'] )) ? $data ['note_eclampsie'] : null;
 		$this->note_autre = (! empty ( $data ['note_autre'] )) ? $data ['note_autre'] : null;

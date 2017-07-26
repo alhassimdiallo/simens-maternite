@@ -3,7 +3,7 @@ namespace Maternite\Model;
 
 class Admission {
 	public $id_admission;
-	public $motif_admission;
+	public $id_type_ad;
 	public $id_evacuation;
 	public $id_reference;
 // 	public $id_grossesse;
@@ -45,7 +45,7 @@ class Admission {
 	public function exchangeArray($data) {
 		
 		$this->id_admission = (! empty ( $data ['id_admission'] )) ? $data ['id_admission'] : null;
-		$this->motif_admission=(!empty($data ['motif_admission'])) ? $data['motif_admission']:null;
+		$this->id_type_ad=(!empty($data ['id_type_ad'])) ? $data['id_type_ad']:null;
 		$this->id_patient = (! empty ( $data ['id_patient'] )) ? $data ['id_patient'] : null;
 		$this->id_evacuation = (! empty ( $data ['id_evacuation'] )) ? $data ['id_evacuation'] : null;
 		$this->id_reference = (! empty ( $data ['id_reference'] )) ? $data ['id_reference'] : null;

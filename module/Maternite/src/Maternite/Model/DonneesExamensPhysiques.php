@@ -23,7 +23,7 @@ class DonneesExamensPhysiques {
 	public $note_pde;
 	public $note_presentation;
 	public $note_bassin;
-
+	public $aspect;
 	
 	
 	
@@ -49,6 +49,7 @@ class DonneesExamensPhysiques {
 		$this->note_pde = (! empty ( $data ['note_pde'] )) ? $data ['note_pde'] : null;
 		$this->note_presentation = (! empty ( $data ['note_presentation'] )) ? $data ['note_presentation'] : null;
 		$this->note_bassin = (! empty ( $data ['note_bassin'] )) ? $data ['note_bassin'] : null;
+		$this->aspect = (! empty ( $data ['aspect'] )) ? $data ['aspect'] : null;
 		
 		
 		

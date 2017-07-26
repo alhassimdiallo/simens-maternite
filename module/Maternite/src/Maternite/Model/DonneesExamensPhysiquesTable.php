@@ -74,6 +74,7 @@ class DonneesExamensPhysiquesTable {
 						'note_pde' => $donnees ['note_pde'],
 						'note_presentation' => $donnees ['note_presentation'],
 						'note_bassin' => $donnees ['note_bassin'],
+						'aspect' => $donnees ['examen_maternite_donnee11'],
 						
 						
 						

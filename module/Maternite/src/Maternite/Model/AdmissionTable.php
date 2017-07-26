@@ -4,7 +4,7 @@ namespace Maternite\Model;
 
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Sql;
-
+use Maternite\View\Helpers\DateHelper;
 class AdmissionTable {
 	protected $tableGateway;
 	
@@ -73,7 +73,6 @@ class AdmissionTable {
 		return $nb;
 	}
 	
-
 	
 	public function addAdmissionRef($donnees) {
 		//$Control = new DateHelper();
@@ -83,8 +82,9 @@ class AdmissionTable {
 	
 		$datadonnee = array (
 				'id_patient' => $donnees ['id_patient'],
-				'motif_admission' => $donnees ['motif_ad'],
-				'id_reference' => $donnees ['id_reference'],
+				'id_type_ad' => $donnees ['motif_ad'],
+				
+				//'id_reference' => $donnees ['id_reference'],
 				'id_service' => $donnees ['id_service'],
 				'date_cons' => $donnees ['date_cons'],
 				'id_employe' => $donnees ['id_employe'],
@@ -105,8 +105,9 @@ class AdmissionTable {
 	
 		$datadonnee = array (
 				'id_patient' => $donnees ['id_patient'],
-				'motif_admission' => $donnees ['motif_ad'],
-				'id_evacuation' => $donnees ['id_evacuation'],
+				'id_type_ad' => $donnees ['motif_ad'],
+				
+				//'id_evacuation' => $donnees ['id_evacuation'],
 				'id_service' => $donnees ['id_service'],
 				'date_cons' => $donnees ['date_cons'],
 				'id_employe' => $donnees ['id_employe'],
@@ -126,8 +127,27 @@ class AdmissionTable {
 		// 		) );
 	
 		$datadonnee = array (
-				'id_patient' => $donnees ['id_patient'],
-				'motif_admission' => $donnees ['motif_ad'],
+// 				'id_patient' => $donnees ['id_patient'],
+				'id_type_ad' => $donnees ['motif_ad'],
+// 				'id_service' => $donnees ['id_service'],
+// 				'date_cons' => $donnees ['date_cons'],
+// 				'id_employe' => $donnees ['id_employe'],
+// 				'date_enregistrement' => $donnees ['date_enregistrement'],
+		);
+	
+		//var_dump($datadonnee); exit();
+		return $this->tableGateway->getLastInsertValue($this->tableGateway->insert($datadonnee));
+	}
+	
+	public function addAdmissio($donnees) {
+		//$Control = new DateHelper();
+		// 		$this->tableGateway->delete ( array (
+		// 				'id_cons' => $donnees ['id_cons']
+		// 		) );
+	
+		$datadonnee = array (
+						'id_patient' => $donnees ['id_patient'],
+				'id_type_ad' => $donnees ['motif_ad'],
 				'id_service' => $donnees ['id_service'],
 				'date_cons' => $donnees ['date_cons'],
 				'id_employe' => $donnees ['id_employe'],
@@ -137,8 +157,6 @@ class AdmissionTable {
 		//var_dump($datadonnee); exit();
 		return $this->tableGateway->getLastInsertValue($this->tableGateway->insert($datadonnee));
 	}
-	
-	
 	
 	public function addAdmissionAccouchement($donnees){
 		//var_dump($donnees);exit();
@@ -326,13 +344,13 @@ class AdmissionTable {
 		}
 	}
 	
-	public function addConsultationMaternite($id_cons,$id_grossesse){
+	public function addConsultationMaternite($id_cons){
 		$db = $this->tableGateway->getAdapter();
 		
 		$sql = new Sql($db);
 		$sQuery = $sql->insert()
 		->into('consultation_maternite')
-		->values(array('id_cons' => $id_cons, 'id_grossesse'=>$id_grossesse));
+		->values(array('id_cons' => $id_cons));
 	
 		$requete = $sql->prepareStatementForSqlObject($sQuery);
 		$requete->execute();
