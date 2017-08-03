@@ -923,7 +923,7 @@ $("#terminer2, #terminer3").click(function () {
     donnees['diagnostic2'] = $("#diagnostic2").val();
     donnees['diagnostic3'] = $("#diagnostic3").val();
     donnees['diagnostic4'] = $("#diagnostic4").val();
-
+    donnees['decisions'] = $("#decisions").val();
     //*********** ORDONNACE (M�dical) ************
     //*********** ORDONNACE (M�dical) ************
     donnees['duree_traitement_ord'] = $("#duree_traitement_ord").val();
@@ -1055,7 +1055,10 @@ $("#terminer2, #terminer3").click(function () {
     donnees['regularite'] = $("#regularite").val();
     donnees['autre'] = $("#autre_go").val();
     donnees['note_autre'] = $("#note_autre_go").val();
-    
+    donnees['contraception'] = $("#contraception").val();
+    donnees['type_contraception'] = $("#type_contraception").val();
+    donnees['duree_contraception'] = $("#duree_contraception").val();
+    donnees['note_contraception'] = $("#note_contraception").val();
     //grosseesse
     
     donnees['ddr'] = $("#ddr").val();
@@ -1066,7 +1069,10 @@ $("#terminer2, #terminer3").click(function () {
     donnees['bb_attendu'] = $("#bb_attendu").val();
     donnees['note_bb'] = $("#note_bb").val(); 
     donnees['nombre_bb'] = $("#nombre_bb").val();
-    
+    donnees['vat_1'] = $("#vat_1").val();
+    donnees['vat_2'] = $("#vat_2").val();
+    donnees['vat_3'] = $("#vat_3").val();
+    donnees['note_vat'] = $("#note_vat").val();
     
     
     
@@ -1088,6 +1094,14 @@ $("#terminer2, #terminer3").click(function () {
     donnees['antibiotique'] = $("#antibiotique").val();
     donnees['anticonvulsant'] = $("#anticonvulsant").val();
     donnees['transfusion'] = $("#transfusion").val();
+    donnees['observations'] = $("#observations").val();
+    donnees['note_accouchement'] = $("#note_accouchement").val();
+    donnees['note_delivrance'] = $("#note_delivrance").val();
+    donnees['note_hemorragie'] = $("#note_hemoragie").val();
+    donnees['note_ocytocique'] = $("#note_ocytocique").val();
+    donnees['note_antibiotique'] = $("#note_antibiotique").val();
+    donnees['note_anticonv'] = $("#note_anticonv").val();
+    donnees['note_transfusion'] = $("#note_transfusion").val();
     
     
     
@@ -1107,14 +1121,16 @@ $("#terminer2, #terminer3").click(function () {
     donnees['vit_k'] = $("#vit_k").val();
     donnees['collyre'] = $("#collyre").val();
     donnees['consult_j1_j2'] = $("#consult_j1_j2").val();
-    
-    
-    
+    donnees['perim_cranien'] = $("#perim_cranien").val();
+    donnees['perim_brachial'] = $("#perim_brachial").val();
+    donnees['perim_cephalique'] = $("#perim_cephalique").val();
+    donnees['note_perim'] = $("#note_perim").val();
+    donnees['taille_enf'] = $("#taille_enf").val();
     //Evacuation et Reference
     //**********--EVACUATION et REFERENCE-********
 
     donnees['motif_ad'] = $("#motif_ad").val();
-    donnees['type_ad'] = $("#type_ad").val();
+   // donnees['type_ad'] = $("#type_ad").val();
     donnees['motif'] = $("#motif").val();
     donnees['service_origine'] = $("#service_origine").val();
 //    donnees['evacue_vers'] = $("#evacue_vers").val();
@@ -1701,6 +1717,13 @@ function AntecedentScript() {
             }
         });
 
+        
+        
+        
+        //Antecedent GO
+        //
+      
+    
         //GYNECO-OBSTETRIQUE TESTER SI C'EST COCHE
         //GYNECO-OBSTETRIQUE TESTER SI C'EST COCHE
         if (temoinMenarcheGO != 1) {
@@ -2826,7 +2849,7 @@ getBbAttendu($('#bb_attendu').val());
 $('.Test').toggle(false);
 function getTest(val){ 
 	
-	if(val=='+'){
+	if(val=='1'){
 		$("#test").html("Test emmel");
 		$('.Test').fadeIn();
 	}else{
@@ -2890,34 +2913,82 @@ function getCycle(val){
 }
 
 
-
-
-
-
-
-
-$('.MotifAdmission').toggle(false);
-function getTypeAd(val){ 
-	alert(val);
-	if(val=='Normal'){
-		$("#motif").html("Motif d\'admission");
-		$('.MotifAdmission').fadeOut();
-		
-	}else {
-		$("#motif span span").html("");
-		$('.MotifAdmission').fadeIn();
-
-	}	
+//pour conteraception
+$('.Contraception').toggle(false);
+function getContraception(val){ 
 	
+	if(val=='1'){
+		$("#contracetion").html("Contraception");
+		$('.Contraception').fadeIn();
+	}else{
+		$("#contraception span span").html("");
+		$('.Contraception').fadeOut();
+		
+	}	
 }
 
 
 
 
 
+//$('.MotifAdmission').toggle(false);
+function getMotif(val){ 
+	//alert(val);
+	if(val==1){
+		$("#motifad").html("Motif d\'admission");
+		$('.MotifAdmission').fadeOut();	
+	}
+		else {
+		$("#motifad span span").html("");
+		$('.MotifAdmission').fadeIn();
+		
+	
+}
+}
 
 
 
+
+//$('.Dystocie').toggle(false);
+function getDystocie(val){ 
+	//alert(val);
+	if(val==1){
+		$("#dystocie").html("DYstocie");
+		$('.Dystocie').fadeOut();	
+	}
+		else {
+		$("#dystocie span span").html("");
+		$('.Dystocie').fadeIn();
+		
+	
+}
+}
+//alert(dystocie);
+
+var eclampsie=$("#eclampsie");
+if (eclampsiee.checked)
+{
+	$('.Eclampsie').toggle(true);
+	}
+else 
+	{
+	$('.Eclampsie').toggle(false);
+	}
+
+//pour accouchement
+
+$('.Accouchement').toggle(false);
+function getAccouchement(val){ 
+	//alert(val);
+	if(val==1){
+		$("#accouchement").html("Accouchement");
+		$('.Accouchement').fadeOut();
+	}else{
+		$("#accouchement span span").html("");
+		$('.Accouchement').fadeIn();
+		
+	}	
+}
 
 
 

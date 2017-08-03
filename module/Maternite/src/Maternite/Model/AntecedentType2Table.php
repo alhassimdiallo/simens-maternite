@@ -47,12 +47,14 @@ class AntecedentType2Table {
         			'quantite_regle' => $donnees ['quantite_regle'],
         			'nb_garniture_jr' => $donnees ['nb_garniture_jr'],
         			'note_dystocie' => $donnees ['note_dystocie'],
-        			'note_eclampsie' => $donnees ['note_eclampsie'],
-        			
+        			'note_eclampsie' => $donnees ['note_eclampsie'], 			
         			'note_cycle' => $donnees ['note_cycle'],
         			'autre' => $donnees ['autre'],
         			'note_autre' => $donnees ['note_autre'],
-        
+        			'contraception' => $donnees ['contraception'],
+        			'type_contraception' => $donnees ['type_contraception'],
+        			'duree_contraception' => $donnees ['duree_contraception'],
+        			'note_contraception' => $donnees ['note_contraception'],
         	);
         
         	
@@ -63,7 +65,37 @@ class AntecedentType2Table {
         }
         
 
-	
+        public function getAntecedentType2($id_pat) {
+        
+        	//$adapter = $this->tableGateway->getAdapter ();
+        	$db = $this->tableGateway->getAdapter ();
+        	$sql = new Sql ( $db );
+        	$sQuery = $sql->select ();
+        
+        	$sQuery->columns ( array (
+        			'*'
+        	) );
+        
+        	$sQuery->from( array (
+        			'ant' => 'antecedent_type_2'
+        	) )->join ( array (
+        			'p' => 'patient'
+        	), 'ant.id_patient = p.ID_PERSONNE', array (
+        
+        	));
+        	$sQuery->where ( array (
+        			'ant.id_patient' => $id_pat
+        
+        	) );
+        
+        	$sQuery->order ( 'ant.id_ant_t2 ASC' );
+        
+        	$stat = $sql->prepareStatementForSqlObject ( $sQuery );
+        
+        	$resultat = $stat->execute ()->current();
+        	//var_dump($resultat);exit();
+        	return $resultat;
+        }
 	
 	
 	

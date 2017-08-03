@@ -4,8 +4,8 @@ namespace Maternite\Model;
 class Admission {
 	public $id_admission;
 	public $id_type_ad;
-	public $id_evacuation;
-	public $id_reference;
+	//public $id_evacuation;
+	//public $id_reference;
 // 	public $id_grossesse;
 // 	public $id_ant_t2;
 	public $id_patient;
@@ -47,8 +47,8 @@ class Admission {
 		$this->id_admission = (! empty ( $data ['id_admission'] )) ? $data ['id_admission'] : null;
 		$this->id_type_ad=(!empty($data ['id_type_ad'])) ? $data['id_type_ad']:null;
 		$this->id_patient = (! empty ( $data ['id_patient'] )) ? $data ['id_patient'] : null;
-		$this->id_evacuation = (! empty ( $data ['id_evacuation'] )) ? $data ['id_evacuation'] : null;
-		$this->id_reference = (! empty ( $data ['id_reference'] )) ? $data ['id_reference'] : null;
+		//$this->id_evacuation = (! empty ( $data ['id_evacuation'] )) ? $data ['id_evacuation'] : null;
+		//$this->id_reference = (! empty ( $data ['id_reference'] )) ? $data ['id_reference'] : null;
 // 		$this->id_grossesse = (! empty ( $data ['id_grossesse'] )) ? $data ['id_grossesse'] : null;
 // 		$this->id_ant_t2 = (! empty ( $data ['id_ant_t2'] )) ? $data ['id_ant_t2'] : null;
 		$this->id_service = (! empty ( $data ['id_service'] )) ? $data ['id_service'] : null;

@@ -111,7 +111,7 @@ public function getReference($id_patient) {
 			//var_dump($dataac);exit();
 			//var_dump($dataaccouchement);exit();
 	}
-	public function getRefer($id_patient) {
+	public function getRefer($id_admission) {
 		$db = $this->tableGateway->getAdapter();
 		$sql = new Sql($db);
 		$sQuery = $sql->select()
@@ -120,7 +120,7 @@ public function getReference($id_patient) {
 		//->join(array('a' => 'admission'), 'a.id_evacuation = eva.id_evacuation' , array('*'))
 		->join(array('a' => 'admission'), 'a.id_admission = ref.id_admission' , array('id_admission'))
 		//->join(array('ant' => 'antecedent_type_1'), 'ant.id_patient = pat.id_personne' , array('*'))
-		->where(array('a.id_patient' => $id_patient));
+		->where(array('a.id_admission' => $id_admission));
 		$stat = $sql->prepareStatementForSqlObject($sQuery);
 		$resultat = $stat->execute()->current();
 		//var_dump($resultat);exit();

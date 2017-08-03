@@ -4,7 +4,7 @@ namespace Maternite\Model;
 
 class Naissance {
 	public $id_maman;
-	//public $id_cons;
+	public $id_cons;
 	public $sexe;
 	public $poids;
 	public $apgar_1;
@@ -19,9 +19,18 @@ class Naissance {
 	public $vit_k;
 	public $collyre;
 	public $consult_j1_j2;
+	public $perim_cranien;
+	public $perim_cephalique;
+	public $perim_brachial;
+	public $taille_enf;
+	public $note_perim;
+	public $note_taille;
+	
+	
+	
 	public function exchangeArray($data) {
 		$this->id_maman = (! empty ( $data ['id_maman'] )) ? $data ['id_maman'] : null;
-		//$this->id_cons = (! empty ( $data ['id_cons'] )) ? $data ['id_cons'] : null;
+		$this->id_cons = (! empty ( $data ['id_cons'] )) ? $data ['id_cons'] : null;
 		$this->sexe= (! empty ( $data ['sexe'] )) ? $data ['sexe'] : null;
 		$this->poids= (! empty ( $data ['poids'] )) ? $data ['poids'] : null;
 	    $this->apgar_1= (! empty ( $data ['apgar_1'] )) ? $data ['apgar_1'] : null;
@@ -36,6 +45,11 @@ class Naissance {
 		$this->vit_k = (! empty ( $data ['vit_k'] )) ? $data ['vit_k'] : null;
 		$this->collyre = (! empty ( $data ['collyre'] )) ? $data ['collyre'] : null;
 		$this->consult_j1_j2 = (! empty ( $data ['consult_j1_j2'] )) ? $data ['consult_j1_j2'] : null;
-		
+		$this->perim_cranien = (! empty ( $data ['perim_cranien'] )) ? $data ['perim_cranien'] : null;
+		$this->perim_brachial = (! empty ( $data ['perim_brachial'] )) ? $data ['perim_brachial'] : null;
+		$this->perim_cephalique = (! empty ( $data ['perim_cephalique'] )) ? $data ['perim_cephalique'] : null;
+		$this->taille_enf = (! empty ( $data ['taille_enf'] )) ? $data ['taille_enf'] : null;
+		$this->note_perim = (! empty ( $data ['note_perim'] )) ? $data ['note_perim'] : null;
+		$this->note_taille = (! empty ( $data ['note_taille'] )) ? $data ['note_taille'] : null;
 	}
 }

@@ -53,9 +53,10 @@ class NaissanceTable {
 
 public function updateNaissance($values) {
 		$this->tableGateway->delete ( array (
-				'id_maman' => $values ['id_maman'] 
+				'id_cons' => $values ['id_cons'] 
 		) );
 			$datanaissance = array (
+					'id_cons' => $values ['id_cons'],
 					'id_maman' => $values ['id_patient'],
 					'sexe' => $values['sexe'],
 					'poids' => $values['poids'],
@@ -70,7 +71,26 @@ public function updateNaissance($values) {
 					'vit_k' => $values['vit_k'],
 					'sat' => $values['sat'],
 					'collyre' => $values['collyre'],
-					'consult_j1_j2' => $values['consult_j1_j2'],
+					'consult_j1_j2' => $values['consult_j1_j2'],					
+					'note_sexe' => $values['note_sexe'],
+					'note_poid' => $values['note_poid'],
+					'note_malf' => $values['note_malf'],
+					'note_apgar' => $values['note_apgar'],
+					'note_cri' => $values['note_cri'],
+					'note_mt' => $values['note_mt'],
+					'note_msp' => $values['note_msp'],
+					'note_sc' => $values['note_sc'],
+					'note_reanim' => $values['note_reanim'],
+					'note_sat' => $values['note_sat'],
+					'note_vit_k' => $values['note_vit_k'],
+					'note_collyre' => $values['note_collyre'],
+					'note_cons_j1_j2' => $values['note_cons_j1_j2'],
+					'perim_cranien' => $values['perim_cranien'],
+					'perim_cephalique' => $values['perim_cephalique'],
+					'perim_brachial' => $values['perim_brachial'],
+					'note_perim' => $values['note_perim'],
+					'taille_enf' => $values['taille_enf'],
+					'note_taille' => $values['note_taille'],
 					
 			);	//var_dump($datanaissance);exit();
 		$this->tableGateway->insert ( $datanaissance );

@@ -2055,7 +2055,7 @@ class AccouchementController extends AbstractActionController
 		$id_evacuation = $this->getEvacuationTable ()-> addEvacuation($donnees_admission_ev);
 		
 
-		$this->getAdmissionTable ()->addAdmissionEv($donnees);
+		//$this->getAdmissionTable ()->addAdmissionEv($donnees);
 		//$this->getAdmissionTable ()->addAdmission($donnees,$date_enregistrement,$id_employe);
 		//$id_admi=$this->getAdmissionTable ()->addAdmissionAccouchement($id_evacuation);
 	
@@ -2067,7 +2067,7 @@ class AccouchementController extends AbstractActionController
 		$id_reference = $this->getReferenceTable ()-> addReference($donnees_admission_ref);
 	
 		//var_dump($donnees);exit();
-		$this->getAdmissionTable ()->addAdmissionRef($donnees);
+		//$this->getAdmissionTable ()->addAdmissionRef($donnees);
 	
 	
 	}	
@@ -2315,39 +2315,98 @@ public function declarerDecesAction() {
 		$image = $this->getConsultationTable()->getPhoto($id_pat);
 		//$id_grossesse= $this->getGrossesseTable ()->addGrossesse();
 	
+		
+		$donne_ante=$this->getAntecedentType1Table()->getAntecedentType1($id_pat);
+		$donne_ante2=$this->getAntecedentType2Table()->getAntecedentType2($id_pat);
+		//var_dump($donne_ante2);exit();
+		$form = new ConsultationForm ();
+		$donne_ant1=array(
+					
+				'enf_viv'=>$donne_ante['enf_viv'],
+				'geste'=>$donne_ante['geste'],
+				'parite'=>$donne_ante['parite'],
+				'note_enf'=>$donne_ante['note_enf'],
+				'note_geste'=>$donne_ante['note_geste'],
+				'note_parite'=>$donne_ante['note_parite'],
+				'mort_ne'=>$donne_ante['mort_ne'],
+				'note_mort_ne'=>$donne_ante['note_mort_ne'],
+				'cesar'=>$donne_ante['cesar'],
+				'note_cesar'=>$donne_ante['note_cesar'],
+				'groupe_sanguins'=>$donne_ante['groupe_sanguin'],
+				'rhesus'=>$donne_ante['rhesus'],
+				'note_gs'=>$donne_ante['note_gs'],
+				'test_emmel'=>$donne_ante['test_emmel'],
+				'profil_emmel'=>$donne_ante['profil_emmel'],
+				'note_emmel'=>$donne_ante['note_emmel'],
+				'note_autre_em'=>$donne_ante['note_autre_em'],
+					
+		);	$form->populateValues($donne_ant1);
+		// var_dump($donne_ante2);exit();
+		$quantite=array(
+				'quantite'=>$donne_ante2['quantite_regle']
+		);
+		$regularite_iregu=array(
+				'option'=>$donne_ante2['cycle'],
+		
+		);
+		$form->get('quantite_regle')->setValueOptions($quantite);
+		$form->get('regularite')->setValueOptions($regularite_iregu);
+		$donne_antecedent2=array(
+				'dystocie'=>$donne_ante2['dystocie'],
+				'eclampsie'=>$donne_ante2['eclampsie'],
+		
+				'duree_cycle'=>$donne_ante2['duree_cycle'],
+				'note_dystocie'=>$donne_ante2['note_dystocie'],
+				'note_eclampsie'=>$donne_ante2['note_eclampsie'],
+				'note_cycle'=>$donne_ante2['note_cycle'],
+				'autre_go'=>$donne_ante2['autre'],
+				'note_autre_go'=>$donne_ante2['note_autre'],
+				'quantite_regle'=>$donne_ante2['quantite_regle'],
+				'nb_garniture_jr'=>$donne_ante2['nb_garniture_jr'],
+				'contraception'=>$donne_ante2['contraception'],
+				'type_contraception'=>$donne_ante2['type_contraception'],
+				'duree_contraception'=>$donne_ante2['duree_contraception'],
+				'note_contraception'=>$donne_ante2['note_contraception'],
+		);//var_dump($donne_antecedent2);exit();
+		$form->populateValues($donne_antecedent2);
+		//var_dump($cycle);exit();
+		
 		// RECUPERER TOUS LES PATIENTS AYANT UN RV aujourd'hui
 		$tabPatientRV = $this->getConsultationTable()->getPatientsRV($IdDuService);
 		$resultRV = null;
 		if (array_key_exists($id_pat, $tabPatientRV)) {
 			$resultRV = $tabPatientRV [$id_pat];
 		}
-		
-		$form = new ConsultationForm ();
-		
-		
-		$type_admissin=$this->getTypeAdmissionTable()->getTypeAdmi($id_pat);
-	
-		$id_type_ad=$type_admissin['id_type_ad'];
-		$type_admi=$type_admissin['type_admi'];
-		
-		
-		if($id_type_ad==1){
-			$form->get('type_ad')->setValue($type_admi);
-			
-		}
-		else if($id_type_ad==2){
-			$evacuation = $this->getEvacuationTable()->getEva($id_pat);
-			$form->get('type_ad')->setValue($type_admi);
+		//var_dump($id_admission);exit();
+		$type=$this->getTypeAdmissionTable()->getTypeAdmis($id_admission);
+		//var_dump($type);exit();
+		$id_type_ad=$type['id_type_ad'];
+		//var_dump($id_type_ad);exit();
+		$type_admission=$this->getTypeAdmissionTable()->getTypeAdmi($id_admission);			
+	  // $form->get('motif_ad')->setValueOptions($type_admission);
+	  // var_dump($type_admission);exit();
+  		if($id_type_ad==1){
+  			//var_dump($type_admission);exit();
+ 			$form->get('motif_ad')->setValueOptions($type_admission);
+ 			
+  		}
+	   
+		elseif($id_type_ad==2){
+			//var_dump($type_admi);exit();
+			$evacuation = $this->getEvacuationTable()->getEva($id_admission);		
+			  $form->get('motif_ad')->setValueOptions($type_admission);
 			$form->get('motif')->setValue($evacuation['motif_evacuation']);
 			$form->get('service_origine')->setValue($evacuation['service_origine_ev']);
+			
 		}
 		
 		
-		else{
-			$reference = $this->getReferenceTable()->getRefer($id_pat);
-			$form->get('type_ad')->setValue($type_admi);
+		else {
+			$reference = $this->getReferenceTable()->getRefer($id_admission);
+		  $form->get('motif_ad')->setValueOptions($type_admission);
 			$form->get('motif')->setValue($reference['motif_reference']);
 			$form->get('service_origine')->setValue($reference['service_origine_ref']);
+			//var_dump($reference);exit();
 		}
 
 	
@@ -2357,8 +2416,8 @@ public function declarerDecesAction() {
 		//var_dump($form);exit();
 	$liste_type = $this->getTypeAccouchementTable ()->listeTypeAccouchement ();
 		$afficheTous = array ("" => 'Selectionnez un Type');
-		
-		$tab_type = array_merge ( $afficheTous, $liste_type );
+	//	var_dump($liste_type);exit();
+		$tab_type = $liste_type ;
 		$form->get('type_accouchement')->setValueOptions($tab_type);
 		
 		// instancier la consultation et r�cup�rer l'enregistrement
@@ -2424,6 +2483,7 @@ public function declarerDecesAction() {
 		);
 		
 	    //var_dump($dat);exit();
+	
 		// Pour recuper les bandelettes
 		$bandelettes = $this->getConsultationTable()->getBandelette($id);
 		
@@ -3194,7 +3254,7 @@ public function declarerDecesAction() {
         $formData = $this->getRequest()->getPost();
         $form->setData($formData);
         $id_admission = $this->params()->fromPost('id_admission');
-        $id_grossesse = $this->params()->fromPost('id_grossesse');
+       // $id_grossesse = $this->params()->fromPost('id_grossesse');
        //  var_dump($formData);exit();
         $user = $this->layout()->user;
         $IdDuService = $user ['IdService'];
@@ -3237,22 +3297,23 @@ public function declarerDecesAction() {
         $this->getConsultationTable()->deleteBandelette($id_cons);
         $this->getConsultationTable()->addBandelette($bandelettes);
         
-       
-     
+       $id_grossesse= $this->getGrossesseTable()->updateGrossesse($formData);
+       // var_dump($id_grossesse);exit();
       $id_antecedent1 = $this->getAntecedentType1Table ()-> updateAntecedentType1($formData); 
     
        		$id_antecedent2 = $this->getAntecedentType2Table ()-> updateAntecedentType2($formData);
        		//var_dump($formData);exit();
        $this->getDonneesExamensPhysiquesTable()->updateExamenPhysique($formData);
-       var_dump('test');exit();
-        $this->getAccouchementTable()->updateAccouchement($formData);
-   
+	
+        $this->getAccouchementTable()->updateAccouchement($formData,$id_grossesse);
+       // var_dump('test');exit();
       
         //ENFANT
+        
+        
        $this->getNaissanceTable()->updateNaissance($formData);
-    
-       // $this->getEvacuationTable()->addEvacuation($formData);
-       // var_dump($formData);exit();
+       //var_dump($formData);exit();
+
      
        
         // POUR LES ANTECEDENTS ANTECEDENTS ANTECEDENTS

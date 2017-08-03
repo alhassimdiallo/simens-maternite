@@ -68,18 +68,48 @@ class AntecedentType1Table {
     
     	);
     
-//     	if(!$result->current()){
+     	if(!$result->current()){
      		$this->tableGateway->insert($datadonnee);
-     	//}else{
-    		//$this->tableGateway->update($datadonnee, array('id_patient'=> $donnees['id_patient']));
-    	//}
+     	}else{
+    		$this->tableGateway->update($datadonnee, array('id_patient'=> $donnees['id_patient']));
+    	}
     	//var_dump($datadonnee); exit();
     	//$this->tableGateway->insert ( $datadonnee );
     }
     
 	
 	
-	
+    public function getAntecedentType1($id_pat) {
+    
+    	//$adapter = $this->tableGateway->getAdapter ();
+    	$db = $this->tableGateway->getAdapter ();
+    	$sql = new Sql ( $db );
+    	$sQuery = $sql->select ();
+    
+    	$sQuery->columns ( array (
+    			'*'
+    	) );
+    
+    	$sQuery->from( array (
+    			'ant' => 'antecedent_type_1'
+    	) )->join ( array (
+    			'p' => 'patient'
+    	), 'ant.id_patient = p.ID_PERSONNE', array (
+    
+    	));
+    	$sQuery->where ( array (
+    			'ant.id_patient' => $id_pat
+    
+    	) );
+    
+    	$sQuery->order ( 'ant.id_ant_t1 ASC' );
+    
+    	$stat = $sql->prepareStatementForSqlObject ( $sQuery );
+    
+    	$resultat = $stat->execute ()->current();
+    	//var_dump($resultat);exit();
+    	return $resultat;
+    }
 	
 	
 	

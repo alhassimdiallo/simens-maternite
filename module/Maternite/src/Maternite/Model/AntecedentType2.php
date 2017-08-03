@@ -16,7 +16,10 @@ class AntecedentType2 {
 	public $note_cycle;
 	public $autre;
 	public $note_autre;
-	
+	public $contraception;
+	public $type_contraception;
+	public $duree_contraception;
+	public $note_contraception;
 
 
 
@@ -34,6 +37,10 @@ class AntecedentType2 {
 		$this->note_eclampsie = (! empty ( $data ['note_eclampsie'] )) ? $data ['note_eclampsie'] : null;
 		$this->note_autre = (! empty ( $data ['note_autre'] )) ? $data ['note_autre'] : null;
 		$this->note_cycle = (! empty ( $data ['note_cycle'] )) ? $data ['note_cycle'] : null;
+		$this->contraception = (! empty ( $data ['contraception'] )) ? $data ['contraception'] : null;
+		$this->type_contraception = (! empty ( $data ['type_contraception'] )) ? $data ['type_contraception'] : null;
+		$this->duree_contraception = (! empty ( $data ['duree_contraception'] )) ? $data ['duree_contraception'] : null;
+		$this->note_contraception = (! empty ( $data ['note_contraception'] )) ? $data ['note_contraception'] : null;
 	}
 	public function getArrayCopy() {
 		//return get_object_vars ( $this );

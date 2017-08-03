@@ -37,7 +37,7 @@ class AccouchementTable {
 		return $result;
 	}
 
-    public function updateAccouchement($donnees) {
+    public function updateAccouchement($donnees,$id_grossesse) {
 	
     	$Control = new DateHelper();
     	
@@ -51,7 +51,7 @@ class AccouchementTable {
 			$dataac = array (
 					'id_cons' => $donnees ['id_cons'],
 					'id_admission'=>$donnees['id_admission'],
-					'id_grossesse'=>$donnees['id_grossesse'],
+					'id_grossesse'=>$id_grossesse,
 					'type_accouchement' => $donnees['type_accouchement'],
 					'motif_type' => $donnees['motif_type'],
 					'date_accouchement' => $date_accouchement,
@@ -65,7 +65,13 @@ class AccouchementTable {
 					'anticonvulsant' => $donnees ['anticonvulsant'],
 					'transfusion' => $donnees['transfusion'],
 					'observations' => $donnees['observations'],
-					
+					'note_accouchement' => $donnees['note_accouchement'],
+					'note_delivrance' => $donnees['note_delivrance'],
+					'note_hemorragie' => $donnees['note_hemorragie'],
+					'note_ocytocique' => $donnees['note_ocytocique'],
+					'note_antibiotique' => $donnees['note_antibiotique'],
+					'note_anticonv' => $donnees['note_anticonv'],
+					'note_transfusion' => $donnees['note_transfusion'],				
 			);
 			
 			//var_dump($dataac);exit();

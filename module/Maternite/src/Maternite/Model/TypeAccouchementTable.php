@@ -25,12 +25,13 @@ class TypeAccouchementTable{
 		$sql = new Sql($adapter);
 		$select = $sql->select();
 		$select->from(array('t'=>'type_accouchement'));
-		$select->columns(array('type_accouch'));
+		$select->columns(array('id_type','type_accouch'));
 		$select->order('id_type ASC');
 		$stat = $sql->prepareStatementForSqlObject($select);
 		$result = $stat->execute();
+		$options = array(0 => "Selectionnez  dans la liste");
 		foreach ($result as $data) {
-			$options[$data['type_accouch']] = $data['type_accouch'];
+			$options[$data['id_type']] = $data['type_accouch'];
 		}
 		//var_dump($data);exit();
 		return $options;

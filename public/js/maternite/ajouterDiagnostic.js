@@ -157,7 +157,7 @@ $(function(){
 	var diagnostic2 = $("#diagnostic2");
 	var diagnostic3 = $("#diagnostic3");
 	var diagnostic4 = $("#diagnostic4");
-	
+	var decisions = $("#decisions");
 	//Au debut on affiche pas le bouton modifier
 	$("#bouton_diagnostic_modifier").toggle(false);
 	//Au debut on affiche le bouton valider
@@ -168,12 +168,13 @@ $(function(){
 	diagnostic2.attr( 'readonly', false);
 	diagnostic3.attr( 'readonly', false);
 	diagnostic4.attr( 'readonly', false);
-	
+	decisions.attr( 'readonly', false);
 	$("#bouton_diagnostic_valider").click(function(){
 		diagnostic1.attr( 'readonly', true).css({'background':'#f8f8f8'});;
 		diagnostic2.attr( 'readonly', true).css({'background':'#f8f8f8'});;
 		diagnostic3.attr( 'readonly', true).css({'background':'#f8f8f8'});;
 		diagnostic4.attr( 'readonly', true).css({'background':'#f8f8f8'});;
+		decisions.attr( 'readonly', true).css({'background':'#f8f8f8'});;
 		$("#bouton_diagnostic_modifier").toggle(true);
 		$("#bouton_diagnostic_valider").toggle(false);
 		
@@ -189,6 +190,7 @@ $(function(){
 		diagnostic2.attr( 'readonly', false).css({'background':'#fff'});;
 		diagnostic3.attr( 'readonly', false).css({'background':'#fff'});;
 		diagnostic4.attr( 'readonly', false).css({'background':'#fff'});;
+		decisions.attr( 'readonly', false).css({'background':'#fff'});;
 		$("#bouton_diagnostic_modifier").toggle(false);
 		$("#bouton_diagnostic_valider").toggle(true);
 		
