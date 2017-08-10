@@ -49,7 +49,7 @@ class AntecedentType2Table {
         			'note_dystocie' => $donnees ['note_dystocie'],
         			'note_eclampsie' => $donnees ['note_eclampsie'], 			
         			'note_cycle' => $donnees ['note_cycle'],
-        			'autre' => $donnees ['autre'],
+        			'autre_go' => $donnees ['autre_go'],
         			'note_autre' => $donnees ['note_autre'],
         			'contraception' => $donnees ['contraception'],
         			'type_contraception' => $donnees ['type_contraception'],

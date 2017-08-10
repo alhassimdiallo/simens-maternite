@@ -29,7 +29,7 @@ class TypeAccouchementTable{
 		$select->order('id_type ASC');
 		$stat = $sql->prepareStatementForSqlObject($select);
 		$result = $stat->execute();
-		$options = array(0 => "Selectionnez  dans la liste");
+		$options = array(0 => "Selectionnez");
 		foreach ($result as $data) {
 			$options[$data['id_type']] = $data['type_accouch'];
 		}

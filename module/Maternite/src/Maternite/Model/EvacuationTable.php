@@ -84,12 +84,13 @@ class EvacuationTable {
 
 	public function getEva($id_admission) {
 		$db = $this->tableGateway->getAdapter();
+		
 		$sql = new Sql($db);
 		$sQuery = $sql->select()
 		->from(array('eva' => 'evacuation'))
 		->columns( array( '*' ))
 		//->join(array('a' => 'admission'), 'a.id_evacuation = eva.id_evacuation' , array('*'))
-		->join(array('a' => 'admission'), 'a.id_admission = eva.id_admission' , array('id_admission'))
+		->join(array('a' => 'admission'), 'a.id_patient = eva.id_patient' , array('id_patient'))
 		//->join(array('ant' => 'antecedent_type_1'), 'ant.id_patient = pat.id_personne' , array('*'))
 		->where(array('a.id_admission' => $id_admission));
 		$stat = $sql->prepareStatementForSqlObject($sQuery);
@@ -98,7 +99,18 @@ class EvacuationTable {
 		return $resultat;
 	}
 	
-
+	public function getEvacuationDuJour() {
+		$today = (new \DateTime ())->format ( 'Y-m-d' );
+		$adapter = $this->tableGateway->getAdapter ();
+		$sql = new Sql ( $adapter );
+		$select = $sql->select ();
+		$select->from ( array (
+				'eva' => 'evacuation'
+		) )->columns( array( '*' ))
+		->join(array('a' => 'admission'), 'a.id_admission = eva.id_admission' , array('id_patient'))
+		->where(array('a.date_cons' => $today)); //var_dump($today);exit();
+		return $sql->prepareStatementForSqlObject ( $select )->execute ()->current ();
+	}
     
 	
 

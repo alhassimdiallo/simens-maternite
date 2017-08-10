@@ -549,7 +549,7 @@ class AccouchementController extends AbstractActionController
 	
 				$donnees['PHOTO'] = $nomfile;
 				//ENREGISTREMENT DE LA PHOTO
-				imagejpeg ( $img, 'C:\wamp\www\simens\public\img\photos_patients\\' . $nomfile . '.jpg' );
+				imagejpeg ( $img, 'C:\wamp\www\simens-maternite\public\img\photos_patients\\' . $nomfile . '.jpg' );
 				//ENREGISTREMENT DES DONNEES
 			
 				$Patient->addPatient ( $donnees , $date_enregistrement , $id_employe );
@@ -2339,27 +2339,29 @@ public function declarerDecesAction() {
 				'profil_emmel'=>$donne_ante['profil_emmel'],
 				'note_emmel'=>$donne_ante['note_emmel'],
 				'note_autre_em'=>$donne_ante['note_autre_em'],
+			
 					
 		);	$form->populateValues($donne_ant1);
 		// var_dump($donne_ante2);exit();
-		$quantite=array(
-				'quantite'=>$donne_ante2['quantite_regle']
-		);
-		$regularite_iregu=array(
-				'option'=>$donne_ante2['cycle'],
+// 		$quantite=array(
+// 				'quantite'=>$donne_ante2['quantite_regle']
+// 		);
+// 		$regularite_iregu=array(
+// 				'option'=>$donne_ante2['cycle'],
 		
-		);
-		$form->get('quantite_regle')->setValueOptions($quantite);
-		$form->get('regularite')->setValueOptions($regularite_iregu);
+// 		);
+// 		$form->get('quantite_regle')->setValueOptions($quantite);
+// 		$form->get('regularite')->setValueOptions($regularite_iregu);
 		$donne_antecedent2=array(
 				'dystocie'=>$donne_ante2['dystocie'],
 				'eclampsie'=>$donne_ante2['eclampsie'],
-		
+				'regularite'=>$donne_ante2['cycle'],
+				'quantite_regle'=>$donne_ante2['quantite_regle'],
 				'duree_cycle'=>$donne_ante2['duree_cycle'],
 				'note_dystocie'=>$donne_ante2['note_dystocie'],
 				'note_eclampsie'=>$donne_ante2['note_eclampsie'],
 				'note_cycle'=>$donne_ante2['note_cycle'],
-				'autre_go'=>$donne_ante2['autre'],
+				'autre_go'=>$donne_ante2['autre_go'],
 				'note_autre_go'=>$donne_ante2['note_autre'],
 				'quantite_regle'=>$donne_ante2['quantite_regle'],
 				'nb_garniture_jr'=>$donne_ante2['nb_garniture_jr'],
@@ -2393,7 +2395,7 @@ public function declarerDecesAction() {
 	   
 		elseif($id_type_ad==2){
 			//var_dump($type_admi);exit();
-			$evacuation = $this->getEvacuationTable()->getEva($id_admission);		
+			$evacuation = $this->getEvacuationTable()->getEvacuationDuJour();		
 			  $form->get('motif_ad')->setValueOptions($type_admission);
 			$form->get('motif')->setValue($evacuation['motif_evacuation']);
 			$form->get('service_origine')->setValue($evacuation['service_origine_ev']);
@@ -3308,9 +3310,7 @@ public function declarerDecesAction() {
         $this->getAccouchementTable()->updateAccouchement($formData,$id_grossesse);
        // var_dump('test');exit();
       
-        //ENFANT
-        
-        
+        //ENFANT      
        $this->getNaissanceTable()->updateNaissance($formData);
        //var_dump($formData);exit();
 

@@ -4,7 +4,9 @@ var tabUrl = base_url.split("public");
 $(function () {
     $("#accordionsssss").accordion();
 });
-
+$(function () {
+    $("#accordionssssssssss").accordion();
+});
 $(function () {
     $("#accordionssss").accordion();
 });
@@ -1053,7 +1055,7 @@ $("#terminer2, #terminer3").click(function () {
     donnees['note_cycle'] = $("#note_cycle").val();
     donnees['duree_cycle'] = $("#duree_cycle").val();
     donnees['regularite'] = $("#regularite").val();
-    donnees['autre'] = $("#autre_go").val();
+    donnees['autre_go'] = $("#autre_go").val();
     donnees['note_autre'] = $("#note_autre_go").val();
     donnees['contraception'] = $("#contraception").val();
     donnees['type_contraception'] = $("#type_contraception").val();
@@ -2874,7 +2876,6 @@ function getProfil(val){
 	}	
 }
 
-getProfil($('#profil_emmel').val());
 
 
 
@@ -2882,13 +2883,14 @@ getProfil($('#profil_emmel').val());
 
 
 
-getCycle($('#regularite').val());
+
+
 //pour quantite
 
-$('.Quantite').toggle(false);
+//$('.Quantite').toggle(false);
 function getQuantite(val){ 
 	
-	if(val=='Abondante'){
+	if(val==1){
 		$("#quantite").html("Quantite Regle");
 		$('.Quantite').fadeIn();
 	}else{
@@ -2897,12 +2899,12 @@ function getQuantite(val){
 	}	
 }
 
-getQuantite($('#quantite_regle').val());
+
 //pour cycle
-$('.Cycle').toggle(false);
+//$('.Cycle').toggle(false);
 function getCycle(val){ 
 	
-	if(val=='Irregulier'){
+	if(val==1){
 		$("#cycle").html("Cycle");
 		$('.Cycle').fadeIn();
 	}else{
@@ -2914,7 +2916,7 @@ function getCycle(val){
 
 
 //pour conteraception
-$('.Contraception').toggle(false);
+//$('.Contraception').toggle(false);
 function getContraception(val){ 
 	
 	if(val=='1'){
@@ -2977,18 +2979,23 @@ else
 
 //pour accouchement
 
-$('.Accouchement').toggle(false);
-function getAccouchement(val){ 
+$('.TypeAccouchement').toggle(false);
+function getAccouchement(val){	
 	//alert(val);
-	if(val==1){
-		$("#accouchement").html("Accouchement");
-		$('.Accouchement').fadeOut();
+	if((val==0)||(val==1)){
+		$("#typeaccouchement").html("Accouchement");
+		$('.TypeAccouchement').fadeOut();
 	}else{
-		$("#accouchement span span").html("");
-		$('.Accouchement').fadeIn();
+		$("#typeaccouchement span span").html("");
+		$('.TypeAccouchement').fadeIn();
 		
 	}	
 }
+
+
+
+
+
 
 
 

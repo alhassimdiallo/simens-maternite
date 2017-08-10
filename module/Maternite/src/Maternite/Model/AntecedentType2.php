@@ -31,7 +31,7 @@ class AntecedentType2 {
 		$this->duree_cycle = (! empty ( $data ['duree_cycle'] )) ? $data ['duree_cycle'] : null;
 		$this->cycle = (! empty ( $data ['cycle'] )) ? $data ['cycle'] : null;
 		$this->quantite_regle = (! empty ( $data ['quantite_regle'] )) ? $data ['quantite_regle'] : null;
-		$this->autre = (! empty ( $data ['autre'] )) ? $data ['autre'] : null;
+		$this->autre_go = (! empty ( $data ['autre_go'] )) ? $data ['autre_go'] : null;
 		$this->nb_garniture_jr = (! empty ( $data ['nb_garniture_jr'] )) ? $data ['nb_garniture_jr'] : null;
 		$this->note_dystocie = (! empty ( $data ['note_dystocie'] )) ? $data ['note_dystocie'] : null;
 		$this->note_eclampsie = (! empty ( $data ['note_eclampsie'] )) ? $data ['note_eclampsie'] : null;

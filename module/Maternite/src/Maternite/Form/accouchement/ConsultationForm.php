@@ -234,7 +234,7 @@ class ConsultationForm extends Form {
 							'value_options' => array (
 									'clair' => iconv ( 'ISO-8859-1', 'UTF-8', 'Clair' ),
 									'tente' => iconv ( 'ISO-8859-1', 'UTF-8', 'Tente(meconium)' ),
-									'ematique' => iconv ( 'ISO-8859-1', 'UTF-8', 'ematique' )
+									'hematique' => iconv ( 'ISO-8859-1', 'UTF-8', 'hematique' )
 							)
 					),
 					'attributes' => array (
@@ -1200,11 +1200,11 @@ $this->add(array(
 				'name' => 'text_chirur',
 				'type' => 'Textarea',
 				'options' => array (
-						'label' => 'Traitement :'
+						'label' => 'CHirurgie :'
 				),
 				'attributes' => array (
-						'readonly' => 'readonly',
-						'id' => 'diagnostic_traitement_chirurgical'
+						//'readonly' => 'readonly',
+						'id' => 'text_chirur'
 				)
 		) );
 		$this->add ( array (
@@ -1222,6 +1222,17 @@ $this->add(array(
 						'readonly' => 'readonly',
 						'id' => 'type_anesthesie_demande' 
 				) 
+		) );
+		$this->add ( array (
+				'name' => 'observation',
+				'type' => 'Textarea',
+				'options' => array (
+						'label' => iconv ( 'ISO-8859-1', 'UTF-8', 'Observation :' )
+				),
+				'attributes' => array (
+						//'readonly' => 'readonly',
+						'id' => 'observation'
+				)
 		) );
 		$this->add ( array (
 				'name' => 'intervention_prevue',
@@ -1805,7 +1816,7 @@ $this->add(array(
 		/* Duree Cycle */
 		$this->add ( array (
 				'name' => 'duree_cycle',
-				'type' => 'text',
+				'type' => 'Number',
 				'attributes' => array (
 						'id' => 'duree_cycle' 
 				) 
@@ -1822,8 +1833,8 @@ $this->add(array(
 				'type' => 'Zend\Form\Element\Select',
 				'options' => array (
 						'value_options' => array (
-								'Regulier' => 'Regulier',
-								'Irregulier' => 'Irregulier',
+								0 => 'Regulier',
+								1 => 'Irregulier',
 								
 						) 
 				),
@@ -1839,8 +1850,8 @@ $this->add(array(
 				'type' => 'Zend\Form\Element\Select',
 				'options' => array (
 						'value_options' => array (
-								'Non Abondante' => 'Non Abondante',
-								'Abondante' => 'Abondante',
+								0 => 'Non Abondante',
+								1 => 'Abondante',
 								
 						) 
 				),
@@ -1852,7 +1863,7 @@ $this->add(array(
 		) );
 		$this->add ( array (
 				'name' => 'nb_garniture_jr',
-				'type' => 'Text',
+				'type' => 'Number',
 				'options' => array (
 		
 				),
@@ -2245,15 +2256,29 @@ $this->add(array(
 		
 		$this->add(array(
 				'name' => 'hemoragie',
-				'type' => 'Text',
+				'type' => 'Select',
+				'options' => array (
+						'value_options' => array(
+								0 => 'Non',
+								 1=> 'Oui' ,
+						),
+				),
 				'attributes' => array(
-						'readonly' => 'readonly',
 						'id' => 'hemoragie',
-						'readonly' => 'readonly',
+						
 						'required' => true,
 				),
 		));
-		
+		$this->add(array(
+				'name' => 'quantite_hemo',
+				'type' => 'Number',
+				'attributes' => array(
+							
+						'id' => 'quantite_hemo',
+						//'readonly' => 'readonly',
+						'required' => true,
+				),
+		));
 		$this->add(array(
 				'name' => 'note_accouchement',
 				'type' => 'Text',
@@ -3447,7 +3472,7 @@ $this->add(array(
 			),
 			'attributes' => array (
 					'id' => 'perim_cranien',
-					'max' => 20,
+					'max' => 100,
 					'min'=>0,
 					'required' => true,
 			)
@@ -3528,9 +3553,570 @@ $this->add(array(
 			),
 	));
 	
+	$this->add ( array (
+			'name' => 'text_observation',
+			'type' => 'Textarea',
+			'options' => array (
+					
+			),
+			'attributes' => array (
+				
+					'id' => 'text_observation'
+			)
+	) );
+	$this->add ( array (
+			'name' => 'suite_de_couches',
+			'type' => 'Textarea',
+			'options' => array (
+						
+			),
+			'attributes' => array (
+	
+					'id' => 'suite_de_couches'
+			)
+	) );
+	$this->add ( array (
+			'name' => 'suite_de_couche',
+			'type' => 'Textarea',
+			'options' => array (
+				
+			),
+			'attributes' => array (
+					
+					'id' => 'suite_de_couche'
+			)
+	) );
+	
+	
+	//Conclusion pour les suites d xouchee
+	$this->add ( array (
+			'name' => 'uterus_cicatriciel',
+			'type' => 'checkbox',
+			'attributes' => array (
+					'id' => 'uterus_cicatriciel'
+			)
+	) );
+	
+	$this->add ( array (
+			'name' => 'note_uterus',
+			'type' => 'Text',
+			'attributes' => array (
+					'id' => 'note_uterus'
+			)
+	) );
+	
+	
+	$this->add ( array (
+			'name' => 'hemoragie_antepart',
+			'type' => 'checkbox',
+			'attributes' => array (
+					'id' => 'hemoragie_antepart'
+			)
+	) );
+	
+	$this->add ( array (
+			'name' => 'note_hemo_per',
+			'type' => 'Text',
+			'attributes' => array (
+					'id' => 'note_hemo_per'
+			)
+	) );
+
+	$this->add ( array (
+			'name' => 'hemoragie_postpart',
+			'type' => 'checkbox',
+			'attributes' => array (
+					'id' => 'hemoragie_postpart'
+			)
+	) );
+	
+	$this->add ( array (
+			'name' => 'note_hemo_post',
+			'type' => 'Text',
+			'attributes' => array (
+					'id' => 'note_hemo_post'
+			)
+	) );
+	
+	
+
+	$this->add ( array (
+			'name' => 'pres_anormal',
+			'type' => 'checkbox',
+			'attributes' => array (
+					'id' => 'pres_anormal'
+			)
+	) );
+	$this->add ( array (
+			'name' => 'note_pres_ano',
+			'type' => 'Text',
+			'attributes' => array (
+					'id' => 'note_pres_ano'
+			)
+	) );
+
+	$this->add ( array (
+			'name' => 'rupt_uterine',
+			'type' => 'checkbox',
+			'attributes' => array (
+					'id' => 'rupt_uterine'
+			)
+	) );
+	
+	$this->add ( array (
+			'name' => 'note_rup',
+			'type' => 'Text',
+			'attributes' => array (
+					'id' => 'note_rup'
+			)
+	) );
+	$this->add ( array (
+			'name' => 'dfp_bassin',
+			'type' => 'checkbox',
+			'attributes' => array (
+					'id' => 'dfp_bassin'
+			)
+	) );
+	
+	$this->add ( array (
+			'name' => 'note_dfp_bassin',
+			'type' => 'Text',
+			'attributes' => array (
+					'id' => 'note_dfp_bassin'
+			)
+	) );
+	$this->add ( array (
+			'name' => 'hemoragie_antepart',
+			'type' => 'checkbox',
+			'attributes' => array (
+					'id' => 'hemoragie_antepart'
+			)
+	) );
+	
+	
+	$this->add ( array (
+			'name' => 'arret_dilatation',
+			'type' => 'checkbox',
+			'attributes' => array (
+					'id' => 'hemoragie_antepart'
+			)
+	) );
+	$this->add ( array (
+			'name' => 'note_arret_dil',
+			'type' => 'Text',
+			'attributes' => array (
+					'id' => 'note_arret_dil'
+			)
+	) );
+	$this->add ( array (
+			'name' => 'travail_sup',
+			'type' => 'checkbox',
+			'attributes' => array (
+					'id' => 'travail_sup'
+			)
+	) );
+	$this->add ( array (
+			'name' => 'note_travail',
+			'type' => 'Text',
+			'attributes' => array (
+					'id' => 'note_travail'
+			)
+	) );
+	$this->add ( array (
+			'name' => 'ligne_action_franchie',
+			'type' => 'checkbox',
+			'attributes' => array (
+					'id' => 'ligne_action_franchie'
+			)
+	) );
+	$this->add ( array (
+			'name' => 'note_ligne',
+			'type' => 'Text',
+			'attributes' => array (
+					'id' => 'note_ligne'
+			)
+	) );
+	$this->add ( array (
+			'name' => 'hta_sup',
+			'type' => 'checkbox',
+			'attributes' => array (
+					'id' => 'hta_sup'
+			)
+	) );
+	$this->add ( array (
+			'name' => 'note_hta',
+			'type' => 'Text',
+			'attributes' => array (
+					'id' => 'note_hta'
+			)
+	) );
+	$this->add ( array (
+			'name' => 'eclampsie_ante',
+			'type' => 'checkbox',
+			'attributes' => array (
+					'id' => 'eclampsie_ante'
+			)
+	) );
+	$this->add ( array (
+			'name' => 'note_ec_ante',
+			'type' => 'Text',
+			'attributes' => array (
+					'id' => 'note_ec_ante'
+			)
+	) );
+	$this->add ( array (
+			'name' => 'pre_eclampsie',
+			'type' => 'checkbox',
+			'attributes' => array (
+					'id' => 'pre_eclampsie'
+			)
+	) );
+	$this->add ( array (
+			'name' => 'note_pre_ec',
+			'type' => 'Text',
+			'attributes' => array (
+					'id' => 'note_pre_ec'
+			)
+	) );
+	$this->add ( array (
+			'name' => 'eclampsie_post',
+			'type' => 'checkbox',
+			'attributes' => array (
+					'id' => 'eclampsie_post'
+			)
+	) );
+	$this->add ( array (
+			'name' => 'note_ec_post',
+			'type' => 'Text',
+			'attributes' => array (
+					'id' => 'note_ec_post'
+			)
+	) );
+	
+	$this->add ( array (
+			'name' => 'infection_puer',
+			'type' => 'checkbox',
+			'attributes' => array (
+					'id' => 'infection_puer'
+			)
+	) );
+	$this->add ( array (
+			'name' => 'note_inf',
+			'type' => 'Text',
+			'attributes' => array (
+					'id' => 'note_inf'
+			)
+	) );
+	$this->add ( array (
+			'name' => 'autre_conc',
+			'type' => 'checkbox',
+			'attributes' => array (
+					'id' => 'autre_conc'
+			)
+	) );
+	$this->add ( array (
+			'name' => 'note_autre_conc',
+			'type' => 'Text',
+			'attributes' => array (
+					'id' => 'note_autre_conc'
+			)
+	) );
 	
 	
 	
+	
+	$this->add(array(
+			'name' => '_dece_dystocie',
+			'type' => 'checkbox',
+			'options' => array (
+	
+			),
+			'attributes' => array(
+					//'registerInArrrayValidator' => true,
+					//'onchange'=>' getDystocie(this.value)',
+					'id' => '_dece_dystocie',
+					//'required' => true,
+			),
+	));
+	$this->add ( array (
+			'name' => 'note_dece_dyst',
+			'type' => 'Text',
+			'attributes' => array (
+					'id' => 'note_dece_dyst'
+			)
+	) );
+
+	$this->add(array(
+			'name' => 'dece_hemoragie_ant',
+			'type' => 'checkbox',
+			'attributes' => array(
+					//'readonly' => 'readonly',
+					'id' => 'dece_hemoragie_ant',
+					//'readonly' => 'readonly',
+					'required' => true,
+			),
+	));	
+	
+	$this->add ( array (
+			'name' => 'note_dece_hemo_ante',
+			'type' => 'Text',
+			'attributes' => array (
+					'id' => 'note_dece_hemo_ante'
+			)
+	) );
+	
+	
+	$this->add(array(
+			'name' => 'dece_hemoragie_post',
+			'type' => 'checkbox',
+			'attributes' => array(
+					//'readonly' => 'readonly',
+					'id' => 'dece_hemoragie_post',
+					//'readonly' => 'readonly',
+					'required' => true,
+			),
+	));
+	$this->add ( array (
+			'name' => 'note_dece_hemo_post',
+			'type' => 'Text',
+			'attributes' => array (
+					'id' => 'note_dece_hemo_post'
+			)
+	) );
+	
+	$this->add(array(
+			'name' => 'hypertension',
+			'type' => 'checkbox',
+			'attributes' => array(
+					//'readonly' => 'readonly',
+					'id' => 'hypertation',
+					//'readonly' => 'readonly',
+					'required' => true,
+			),
+	));
+	$this->add ( array (
+			'name' => 'note_hypertension',
+			'type' => 'Text',
+			'attributes' => array (
+					'id' => 'note_hypertension'
+			)
+	) );
+	
+	$this->add(array(
+			'name' => 'infection',
+			'type' => 'checkbox',
+			'attributes' => array(
+					//'readonly' => 'readonly',
+					'id' => 'infection',
+					//'readonly' => 'readonly',
+					'required' => true,
+			),
+	));
+	
+	$this->add ( array (
+			'name' => 'note_infection',
+			'type' => 'Text',
+			'attributes' => array (
+					'id' => 'note_infection'
+			)
+	) );
+	$this->add(array(
+			'name' => 'autre_cause_directe',
+			'type' => 'checkbox',
+			'attributes' => array(
+					//'readonly' => 'readonly',
+					'id' => 'autre_cause_directe',
+					//'readonly' => 'readonly',
+					'required' => true,
+			),
+	));
+	
+	$this->add(array(
+			'name' => 'note_autre_cause_dir',
+			'type' => 'Text',
+			'attributes' => array(
+					//'readonly' => 'readonly',
+					'id' => 'note_autre_cause_dir',
+					//'readonly' => 'readonly',
+					'required' => true,
+			),
+	));
+	$this->add(array(
+			'name' => 'autre_cause_indirecte',
+			'type' => 'checkbox',
+			'attributes' => array(
+					//'readonly' => 'readonly',
+					'id' => 'autre_cause_indirecte',
+					//'readonly' => 'readonly',
+					'required' => true,
+			),
+	));
+	
+	$this->add(array(
+			'name' => 'note_autre_cause_indir',
+			'type' => 'Text',
+			'attributes' => array(
+					//'readonly' => 'readonly',
+					'id' => 'note_autre_cause_indir',
+					//'readonly' => 'readonly',
+					'required' => true,
+			),
+	));
+	$this->add(array(
+			'name' => 'indetermine',
+			'type' => 'checkbox',
+			'attributes' => array(
+					//'readonly' => 'readonly',
+					'id' => 'indetermine',
+					//'readonly' => 'readonly',
+					'required' => true,
+			),
+	));
+
+	$this->add(array(
+			'name' => 'note_indetermine',
+			'type' => 'Text',
+			'attributes' => array(
+					//'readonly' => 'readonly',
+					'id' => 'note_indetermine',
+					//'readonly' => 'readonly',
+					'required' => true,
+			),
+	));
+	
+	
+	
+	
+	
+	
+	$this->add(array(
+			'name' => 'viv_bien_portant',
+			'type' => 'Select',
+			'options' => array (
+					'value_options' => array(
+							0 => iconv ( 'ISO-8859-1', 'UTF-8','Non') ,
+							1 => iconv ( 'ISO-8859-1', 'UTF-8','Oui') ,
+					),
+			),
+			'attributes' => array(
+					'id' => 'viv_bien_portant',
+					
+			),
+	));
+
+	$this->add(array(
+			'name' => 'note_viv_bien_portant',
+			'type' => 'Text',
+			'attributes' => array(
+					//'readonly' => 'readonly',
+					'id' => 'note_viv_bien_portant',
+					//'readonly' => 'readonly',
+					'required' => true,
+			),
+	));
+	$this->add(array(
+			'name' => 'viv_mal_form',
+			'type' => 'Select',
+			'options' => array (
+					'value_options' => array(
+							0 => iconv ( 'ISO-8859-1', 'UTF-8','Non') ,
+							1 => iconv ( 'ISO-8859-1', 'UTF-8','Oui') ,
+					),
+			),
+			'attributes' => array(
+					'id' => 'viv_mal_form',
+						
+			),
+	));
+
+	$this->add(array(
+			'name' => 'note_viv_mal_form',
+			'type' => 'Text',
+			'attributes' => array(
+					//'readonly' => 'readonly',
+					'id' => 'note_viv_mal_form',
+					//'readonly' => 'readonly',
+					'required' => true,
+			),
+	));
+	$this->add(array(
+			'name' => 'decede',
+			'type' => 'Select',
+			'options' => array (
+					'value_options' => array(
+							0 => iconv ( 'ISO-8859-1', 'UTF-8','Non') ,
+							1 => iconv ( 'ISO-8859-1', 'UTF-8','Oui') ,
+					),
+			),
+			'attributes' => array(
+					'id' => 'decede',
+	
+			),
+	));
+	$this->add(array(
+			'name' => 'note_decede',
+			'type' => 'Text',
+			'attributes' => array(
+					//'readonly' => 'readonly',
+					'id' => 'note_decede',
+					//'readonly' => 'readonly',
+					'required' => true,
+			),
+	));
+	$this->add(array(
+			'name' => 'date_dece',
+			'type' => 'Text',
+			'attributes' => array(
+					//'readonly' => 'readonly',
+					'id' => 'date_dece',
+					//'readonly' => 'readonly',
+					'required' => true,
+			),
+	));
+	$this->add(array(
+			'name' => 'heure_dece',
+			'type' => 'Time',
+			'attributes' => array(
+					//'readonly' => 'readonly',
+					'id' => 'heure_dece',
+					//'readonly' => 'readonly',
+					'required' => true,
+			),
+	));
+	$this->add(array(
+			'name' => 'cause_dece',
+			'type' => 'Text',
+			'attributes' => array(
+					//'readonly' => 'readonly',
+					'id' => 'cause_dece',
+					//'readonly' => 'readonly',
+					'required' => true,
+			),
+	));
+	$this->add(array(
+			'name' => 'malade',
+			'type' => 'Select',
+			'options' => array (
+					'value_options' => array(
+							0 => iconv ( 'ISO-8859-1', 'UTF-8','Non') ,
+							1 => iconv ( 'ISO-8859-1', 'UTF-8','Oui') ,
+					),
+			),
+			'attributes' => array(
+					'id' => 'malade',
+	
+			),
+	));
+	$this->add(array(
+			'name' => 'note_malade',
+			'type' => 'Text',
+			'attributes' => array(
+					//'readonly' => 'readonly',
+					'id' => 'note_malade',
+					//'readonly' => 'readonly',
+					'required' => true,
+			),
+	));
 	}
 }
 
