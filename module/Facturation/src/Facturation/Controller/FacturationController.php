@@ -302,43 +302,40 @@ class FacturationController extends AbstractActionController {
 	}
 	
 	
-	public function admissionBlocAction(){
-
+public function admissionBlocAction(){
+		
+		$patient = $this->getPatientTable ();
+		$output = $patient->laListePatientsBlocAjax();
+		
+		//var_dump($output);exit();
+		
 		$layout = $this->layout ();
 		$layout->setTemplate ( 'layout/facturation' );
-		
 		$numero = $this->numeroFacture();
 		//INSTANCIATION DU FORMULAIRE D'ADMISSION
 		$formAdmission = new AdmissionBlocForm();
-		
 		$service = $this->getTarifConsultationTable()->listeService();
 		$formAdmission->get ( 'service' )->setValueOptions ( $service );
-		
 		$medecin = $this->getTarifConsultationTable()->listeMedecins();
 		$formAdmission->get ( 'operateur' )->setValueOptions ( $medecin );
-		
+		$id_cons = $this->params()->fromPost ('id_cons');
 		if ($this->getRequest ()->isPost ()) {
-				
 			$today = new \DateTime ();
 			$dateAujourdhui = $today->format( 'Y-m-d' );
-				
 			$id = ( int ) $this->params ()->fromPost ( 'id', 0 );
-				
-			//MISE A JOUR DE L'AGE DU PATIENT
-			//MISE A JOUR DE L'AGE DU PATIENT
+			$iddemande = ( int ) $this->params ()->fromPost ( 'iddemande', 0 );
+			$demande = $this->getAdmissionTable()->getDemandeOperation($iddemande);
+			$numeroVPA = $demande['numeroVPA']; //met la valeur de numeroVPA dans son champ sur la vue
+			$typeIntervention = $demande['type_intervention'];
+			$diagnostic = $demande['diagnostic'];
+			
 			//MISE A JOUR DE L'AGE DU PATIENT
 			$personne = $this->getPatientTable()->miseAJourAgePatient($id);
 			//*******************************
-			//*******************************
-			//*******************************
 				
 			$pat = $this->getPatientTable ();
-				
 			$unPatient = $pat->getInfoPatient( $id );
-		
 			$photo = $pat->getPhoto ( $id );
-		
-				
 			$date = $unPatient['DATE_NAISSANCE'];
 			if($date){ $date = $this->convertDate ( $unPatient['DATE_NAISSANCE'] ); }else{ $date = null;}
 		
@@ -383,18 +380,22 @@ class FacturationController extends AbstractActionController {
 				
 			$html .= "<script>
 					   $('#service').css({'color':'black', 'font-family': 'Times  New Roman','font-size':'17px'});
+					   $('#vpa').val('".$numeroVPA."').attr('disabled', true);
+					   $('#intervention_prevue').val('".$typeIntervention."').attr('readonly',true);
+					   $('#diagnostic').val('".$diagnostic."').attr('disabled',true);
+					   $('#idDemandeOperation').val($iddemande);
 					 </script>"; 
-		
 			$this->getResponse ()->getHeaders ()->addHeaderLine ( 'Content-Type', 'application/html; charset=utf-8' );
 			return $this->getResponse ()->setContent ( Json::encode ( $html ) );
 		}
-		
-		return array (
-				'form' => $formAdmission
-		);
-		
+		return array ( 'form' => $formAdmission );
 	}
-	
+	public function listePatientAdmisBlocAjaxAction() {
+		$output = $this->getPatientTable ()->getListePatientsAdmisBloc();
+		return $this->getResponse ()->setContent ( Json::encode ( $output, array (
+				'enableJsonExprFinder' => true
+		) ) );
+	}
 	public function getServiceAction() {
 		$id_medecin = ( int ) $this->params ()->fromPost ( 'id_medecin', 0 );
 		
@@ -644,12 +645,7 @@ class FacturationController extends AbstractActionController {
 		) );
 	}
 	
-	public function listePatientAdmisBlocAjaxAction() {
-		$output = $this->getPatientTable ()->getListePatientsAdmisBloc();
-		return $this->getResponse ()->setContent ( Json::encode ( $output, array (
-				'enableJsonExprFinder' => true
-		) ) );
-	}
+	
 	
 	public function supprimerAdmissionBlocAction(){
 		

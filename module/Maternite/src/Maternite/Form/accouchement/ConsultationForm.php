@@ -1850,8 +1850,8 @@ $this->add(array(
 				'type' => 'Zend\Form\Element\Select',
 				'options' => array (
 						'value_options' => array (
-								0 => 'Non Abondante',
-								1 => 'Abondante',
+								0 => 'non abnte',
+								1 => ' abdte',
 								
 						) 
 				),
@@ -1863,7 +1863,7 @@ $this->add(array(
 		) );
 		$this->add ( array (
 				'name' => 'nb_garniture_jr',
-				'type' => 'Number',
+				'type' => 'Text',
 				'options' => array (
 		
 				),
@@ -2448,8 +2448,8 @@ $this->add(array(
 				'options' => array (
 							
 						'value_options' => array (
-								'Masculin' => iconv ( 'ISO-8859-1', 'UTF-8', 'Masculin' ),
-								'Feminin' => iconv ( 'ISO-8859-1', 'UTF-8', 'Feminin' )
+								'Masculin' => iconv ( 'ISO-8859-1', 'UTF-8', 'M' ),
+								'Feminin' => iconv ( 'ISO-8859-1', 'UTF-8', 'F' )
 								
 						)
 				),
@@ -2546,14 +2546,21 @@ $this->add(array(
 	
 	
 	
-	$this->add ( array (
+	$this->add(array(
 			'name' => 'malf',
-			'type' => 'text',
-			'attributes' => array (
-					'readonly' => 'readonly',
-					'id' => 'malf'
-			)
-	) );
+			'type' => 'Select',
+			'options' => array (
+					'value_options' => array(
+							0 => 'Non',
+							1=> 'Oui' ,
+					),
+			),
+			'attributes' => array(
+					//'readonly' => 'readonly',
+					'id' => 'malf',
+					
+			),
+	));
 	$this->add ( array (
 			'name' => 'note_malf',
 			'type' => 'text',
@@ -2588,14 +2595,22 @@ $this->add(array(
 			)
 	) );
 	
-	$this->add ( array (
+	
+	$this->add(array(
 			'name' => 'maintien_temp',
-			'type' => 'text',
-			'attributes' => array (
+			'type' => 'Select',
+			'options' => array (
+					'value_options' => array(
+							0 => 'Non',
+							1=> 'Oui' ,
+					),
+			),
+			'attributes' => array(
 					//'readonly' => 'readonly',
-					'id' => 'maintien_temp'
-			)
-	) );
+					'id' => 'maintien_temp',
+					
+			),
+	));
 	$this->add ( array (
 			'name' => 'note_temp',
 			'type' => 'text',
@@ -2612,22 +2627,36 @@ $this->add(array(
 					'id' => 'note_precoce'
 			)
 	) );
-	$this->add ( array (
+	$this->add(array(
 			'name' => 'mise_soin_precoce',
-			'type' => 'text',
-			'attributes' => array (
-					'readonly' => 'readonly',
-					'id' => 'mise_soin_precoce'
-			)
-	) );
-	$this->add ( array (
+			'type' => 'Select',
+			'options' => array (
+					'value_options' => array(
+							0 => 'Non',
+							1=> 'Oui' ,
+					),
+			),
+			'attributes' => array(
+					//'readonly' => 'readonly',
+					'id' => 'mise_soin_precoce',
+					
+			),
+	));
+		$this->add(array(
 			'name' => 'soin_cordon',
-			'type' => 'text',
-			'attributes' => array (
-					'readonly' => 'readonly',
-					'id' => 'soin_cordon'
-			)
-	) );
+			'type' => 'Select',
+			'options' => array (
+					'value_options' => array(
+							0 => 'Non',
+							1=> 'Oui' ,
+					),
+			),
+			'attributes' => array(
+					//'readonly' => 'readonly',
+					'id' => 'soin_cordon',
+					
+			),
+	));
 	$this->add ( array (
 			'name' => 'note_cordon',
 			'type' => 'text',
@@ -2636,14 +2665,21 @@ $this->add(array(
 					'id' => 'note_cordon'
 			)
 	) );
-	$this->add ( array (
+	$this->add(array(
 			'name' => 'reanimation',
-			'type' => 'text',
-			'attributes' => array (
-					'readonly' => 'readonly',
-					'id' => 'reanimation'
-			)
-	) );
+			'type' => 'Select',
+			'options' => array (
+					'value_options' => array(
+							0 => 'Non',
+							1=> 'Oui' ,
+					),
+			),
+			'attributes' => array(
+					//'readonly' => 'readonly',
+					'id' => 'reanimation',
+					
+			),
+	));
 	$this->add ( array (
 			'name' => 'note_reanimation',
 			'type' => 'text',
@@ -3190,7 +3226,7 @@ $this->add(array(
 	
 	$this->add ( array (
 			'name' => 'nb_cpn',
-			'type' => 'number',
+			'type' => 'Text',
 			'options' => array (
 					//'label' => iconv('ISO-8859-1', 'UTF-8','Nombre CPN:')
 			),

@@ -4,6 +4,7 @@ namespace Facturation\Model;
 class Admission {
 	public $id_admission;
 	public $id_patient;
+	public $id_cons;
 	public $id_service;
 	public $date_cons;
 	public $montant;
@@ -22,6 +23,7 @@ class Admission {
 	public function exchangeArray($data) {
 		$this->id_admission = (! empty ( $data ['id_admission'] )) ? $data ['id_admission'] : null;
 		$this->id_patient = (! empty ( $data ['id_patient'] )) ? $data ['id_patient'] : null;
+		$this->id_cons = (! empty ( $data ['id_cons'] )) ? $data ['id_cons'] : null;
 		$this->id_service = (! empty ( $data ['id_service'] )) ? $data ['id_service'] : null;
 		$this->date_cons = (! empty ( $data ['date_cons'] )) ? $data ['date_cons'] : null;
 		$this->montant = (! empty ( $data ['montant'] )) ? $data ['montant'] : null;

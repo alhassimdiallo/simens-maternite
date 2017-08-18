@@ -481,13 +481,13 @@ return array(
     								
     								
     								
-    								'liste-demandes-vpa' =>      'anesthesie',
-    								'liste-demandes-vpa-ajax' => 'anesthesie',
-    								'details-demande-visite' =>  'anesthesie',
-    								'save-result-vpa' => 'anesthesie',
-    								'liste-recherche-vpa' => 'anesthesie',
-    								'liste-recherche-vpa-ajax' => 'anesthesie',
-    								'details-recherche-visite' => 'anesthesie',
+    								'liste-demandes-vpa' =>     array('anesthesie','gynecologue'), 
+    								'liste-demandes-vpa-ajax' => array('anesthesie','gynecologue'),
+    								'details-demande-visite' =>array('anesthesie','gynecologue'),
+    								'save-result-vpa' => array('anesthesie','gynecologue'),
+    								'liste-recherche-vpa' => array('anesthesie','gynecologue'),
+    								'liste-recherche-vpa-ajax' => array('anesthesie','gynecologue'),
+    								'details-recherche-visite' =>array('anesthesie','gynecologue'),
     								
     								
     								
@@ -619,13 +619,13 @@ return array(
     								'liste-recherche-examens-effectues-ajax' => array('archivage','medecin'),
     								
     								/*Anesth�sie*/
-    								'ajouter-resultat-vpa' => array('archivage','medecin'),
-    								'liste-demandes-vpa-ajax' => array('archivage','medecin'),
-    								'details-demande-visite' => array('archivage','medecin'),
-    								'liste-resultats-vpa' => array('archivage','medecin'),
-    								'liste-recherche-vpa-ajax' => array('archivage','medecin'),
-    								'save-result-vpa' => array('archivage','medecin'),
-    								'details-recherche-visite' => array('archivage','medecin'),
+    								'ajouter-resultat-vpa' => array('archivage','medecin','gynecologue'),
+    								'liste-demandes-vpa-ajax' => array('archivage','medecin','gynecologue'),
+    								'details-demande-visite' => array('archivage','medecin','gynecologue'),
+    								'liste-resultats-vpa' => array('archivage','medecin','gynecologue'),
+    								'liste-recherche-vpa-ajax' => array('archivage','medecin','gynecologue'),
+    								'save-result-vpa' => array('archivage','medecin','gynecologue'),
+    								'details-recherche-visite' => array('archivage','medecin','gynecologue'),
     								
     						),
     				),

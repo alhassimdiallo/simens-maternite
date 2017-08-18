@@ -53,7 +53,7 @@ class AccouchementController extends AbstractActionController
     protected $antecedent_grossesse;
     protected $naissanceTable;
     protected $dateHelper;
-    //protected $consultationTable;
+    protected $devenir_nouveau_neTable;
     protected $consultationMaterniteTable;
     protected $motifAdmissionTable;
     protected $rvPatientConsTable;
@@ -444,7 +444,15 @@ class AccouchementController extends AbstractActionController
 		return $this->naissanceTable;
 	}
 	
-	
+	public function getDevenirNouveauNeTable()
+	{
+		if (!$this->$devenir_nouveau_neTable) {
+			$sm = $this->getServiceLocator();
+			$this->$devenir_nouveau_neTable = $sm->get('Maternite\Model\$DevenirNouveauNeTable');
+		}
+		//var_dump($$this->accouchementTable);exit();
+		return $this->$devenir_nouveau_neTable;
+	}
 	public function admissionGrossesseNormalAction()
 	{
 		
@@ -3313,9 +3321,8 @@ public function declarerDecesAction() {
         //ENFANT      
        $this->getNaissanceTable()->updateNaissance($formData);
        //var_dump($formData);exit();
-
-     
-       
+//Nouveau ne
+       $this->getDevenirNouveauNeTable()->updateNouveauNe($formData);
         // POUR LES ANTECEDENTS ANTECEDENTS ANTECEDENTS
         // POUR LES ANTECEDENTS ANTECEDENTS ANTECEDENTS
         // POUR LES ANTECEDENTS ANTECEDENTS ANTECEDENTS

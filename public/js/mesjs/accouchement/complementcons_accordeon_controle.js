@@ -1128,6 +1128,20 @@ $("#terminer2, #terminer3").click(function () {
     donnees['perim_cephalique'] = $("#perim_cephalique").val();
     donnees['note_perim'] = $("#note_perim").val();
     donnees['taille_enf'] = $("#taille_enf").val();
+    
+    
+  //**********--DEVENU DU NOUVEAU NE-********
+
+    donnees['viv_bien_portant'] = $("#viv_bien_portant").val();
+    donnees['viv_mal_form'] = $("#viv_mal_form").val();
+    donnees['malade'] = $("#malade").val();
+    donnees['decede'] = $("#decede").val();
+    donnees['date_dece'] = $("#date_dece").val();
+    donnees['heure_dece'] = $("#heure_dece").val();
+    donnees['note_viv_bien_portant'] = $("#note_viv_bien_portant").val();
+    donnees['note_mal_form'] = $("#note_mal_form").val();
+    donnees['note_malade'] = $("#note_malade").val();
+    donnees['note_decede'] = $("#note_decede").val();
     //Evacuation et Reference
     //**********--EVACUATION et REFERENCE-********
 

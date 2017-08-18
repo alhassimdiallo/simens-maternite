@@ -94,9 +94,10 @@ $("#naissance").toggle(false);
 
 <?php
 }
-if( $role=='infirmier'){ ?>
+if(( $role=='infirmier')||($role=='gynecologue')){ ?>
 <script>
 $("#deces").toggle(false);
+$("#naissance").toggle(false);
 $("#archivage").toggle(false);
 </script>
 

@@ -217,7 +217,7 @@
 
     font-size: 13px;
 
-    left: 10px; /*d�placer le label*/
+    left: 15px; /*d�placer le label*/
 
     min-width: 60px;
 
@@ -229,9 +229,9 @@
 
     padding-left: 10px;
 
-    position: relative;
+    position: top;
 
-    top: 5px;
+    top: 4px;
 
     z-index: 1;
 
@@ -4139,7 +4139,7 @@ font-size: 16px;
 
     font-size: 16px;
 
-    padding-top: 4px;
+    padding-top: 10px;
 
     padding-right: 10px;
 
@@ -4570,7 +4570,9 @@ div .dataTables_paginate {
     font-size: 18px;
 }
 
-
+#observations, #consult_j1_j2,#examen_maternite_donnee8, #examen_maternite_donnee9{
+    width: 100%;
+}
 
 .antecedent_go input[ type='number']{
     width: 50px;
@@ -4750,16 +4752,16 @@ div .dataTables_paginate {
 
     font-size: 16px;
 
-    padding-top: 4px;
+    padding-top: 10px;
 
     padding-right: 10px;
 
     padding-bottom: 4px;
 
     padding-left: 10px;
-
-    position: relative;
-
+/*left: 20%; d�placer le label*/
+    
+position: relative;
     font-family: time new romans;
 width: 77%; /*115px; /* la largeur du champ input*/
 

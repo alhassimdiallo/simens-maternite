@@ -75,12 +75,13 @@
      </div>
       </li>
     <li style="width: 15%; ">
-    <!--  <div style='width: 30%; padding-top: 10px; float:left;'>
-     
-         <a href="<?php //echo $this->url('hospitalisation', array('action'=>'suivi-patient'));?>">
-           <img src="<?php //echo $this->basePath().'/img/light/soin.png';?>" title="Appliquer les Soin"/>
+     <div style='width: 30%; padding-top: 10px; float:left;'>
+     <?php //if(($user['role'] == 'medecin') || ($user['role'] == 'gynecologue')){ ?>
+         <a href="<?php echo $this->url('hospitalisation', array('action'=>'suivi-patient'));?>">
+           <img src="<?php echo $this->basePath().'/img/light/soin.png';?>" title="Appliquer les Soin"/>
          </a>
-      </div> -->
+         <?php //}?>
+      </div> 
      <div style='width: 70%; padding-top: 10px; float:left;'>
         <a href="<?php echo $this->url('admin', array('action'=>'logout'));?>">
           <img src="<?php echo $this->basePath().'/img/light/bended_arrow_right.png';?>"/> <span style="color: white; font-size: 15px; font-family: New time romans;"><i>D&eacute;connexion</i></span>

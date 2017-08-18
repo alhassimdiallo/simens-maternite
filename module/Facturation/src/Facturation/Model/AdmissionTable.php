@@ -6,7 +6,6 @@ use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Sql;
 
 class AdmissionTable {
-
 	protected $tableGateway;
 	public function __construct(TableGateway $tableGateway) {
 		$this->tableGateway = $tableGateway;
@@ -14,10 +13,8 @@ class AdmissionTable {
 	public function getPatientsAdmis() {
 		$today = new \DateTime ( 'now' );
 		$date = $today->format ( 'Y-m-d' );
-		
 		$adapter = $this->tableGateway->getAdapter ();
 		$sql = new Sql ( $adapter );
-		
 		$select = $sql->select ();
 		$select->from ( array (
 				'p' => 'patient'
@@ -46,6 +43,7 @@ class AdmissionTable {
 				$select->where ( array (
 				'a.date_cons' => $date
 		) );
+			
 		
 		$select->order ( 'id_admission DESC' );
 		$stat = $sql->prepareStatementForSqlObject ( $select );
@@ -74,26 +72,37 @@ class AdmissionTable {
 		$this->tableGateway->insert($donnees);
 	}
 	
+	
+	//ENREGISTREMENT D'UNE ADMISSION BLOC A LA BASE DE DONNEES
+	//ENREGISTREMENT D'UNE ADMISSION BLOC A LA BASE DE DONNEES
 	public function addAdmissionBloc($donnees){
 		$db = $this->tableGateway->getAdapter();
 		$sql = new Sql($db);
 			$sQuery = $sql->insert()
 			->into('admission_bloc')
 			->values($donnees);
-			$sql->prepareStatementForSqlObject($sQuery)->execute();
+			$requete = $sql->prepareStatementForSqlObject($sQuery);
+			$requete->execute();
 	}
 	
-	public function updateAdmissionBloc($donnees){
+	public function updateAdmissionBloc( $donneesAdmission , $id_admission){
 		$db = $this->tableGateway->getAdapter();
 		$sql = new Sql($db);
 		$sQuery = $sql->update()
 		->table('admission_bloc')
-		->set( $donnees )
-		->where(array('id_admission' => $donnees['id_admission'] ));
+		->set( $donneesAdmission )
+		->where(array('id_admission' => $id_admission ));
 		$sql->prepareStatementForSqlObject($sQuery)->execute();
-	
 	}
-	
+	public function updateDemandeOperationBloc( $donneesDemandeOperation , $id_cons){
+		$db = $this->tableGateway->getAdapter();
+		$sql = new Sql($db);
+		$sQuery = $sql->update()
+		->table('demande_operation')
+		->set( $donneesDemandeOperation )
+		->where(array('id_cons' => $id_cons ));
+		$sql->prepareStatementForSqlObject($sQuery)->execute();
+	}
 	/*
 	 * Recupérer la liste des patients admis et déjà consultés pour aujourd'hui
 	 */
@@ -159,7 +168,7 @@ class AdmissionTable {
 		) );
 		$row =  $rowset->current ();
 		if (! $row) {
-			throw new \Exception ( "Could not find row $id" );
+			return null;
 		}
 		return $row;
 	}
@@ -173,6 +182,14 @@ class AdmissionTable {
 		return $requete->execute()->current();
 	}
 	
+	public function getInfosDemandeOperationBloc($id_cons){
+		$db = $this->tableGateway->getAdapter();
+		$sql = new Sql($db);
+		$sQuery = $sql->select('demande_operation')
+		->where(array('id_cons' => $id_cons));
+		$requete = $sql->prepareStatementForSqlObject($sQuery);
+		return $requete->execute()->current();
+	}
 	
 	public function getProtocoleOperatoireBloc($idAdmission){
 		$db = $this->tableGateway->getAdapter();
@@ -186,7 +203,18 @@ class AdmissionTable {
 	public function getListeProtocoleOperatoireBloc(){
 	    $db = $this->tableGateway->getAdapter();
 	    $sql = new Sql($db);
-	    $sQuery = $sql->select('protocole_operatoire_bloc');
+	    $sQuery = $sql->select('protocole_operatoire_bloc')
+	    ->group("protocole_operatoire");
+	    $requete = $sql->prepareStatementForSqlObject($sQuery);
+	    return $requete->execute();
+	}
+	
+	public function getListeSoinsPostOperatoireBloc(){
+	    $db = $this->tableGateway->getAdapter();
+	    $sql = new Sql($db);
+	    $sQuery = $sql->select('protocole_operatoire_bloc')
+	    ->group("soins_post_operatoire");
+	     
 	    $requete = $sql->prepareStatementForSqlObject($sQuery);
 	    return $requete->execute();
 	}
@@ -232,11 +260,11 @@ class AdmissionTable {
 		}
 	}
 	
-	public function addConsultationEffective($id_cons){
+	public function addConsultationOrl($id_cons){
 		$db = $this->tableGateway->getAdapter();
 		$sql = new Sql($db);
 		$sQuery = $sql->insert()
-		->into('consultation_effective')
+		->into('consultation_orl')
 		->values(array('ID_CONS' => $id_cons));
 		$requete = $sql->prepareStatementForSqlObject($sQuery);
 		$requete->execute();
@@ -382,4 +410,97 @@ class AdmissionTable {
 	    }
 	}
 	
+	//GESTION DES FICHIER MP3 DES PROTOCOLES
+	//GESTION DES FICHIER MP3 DES PROTOCOLES
+	//GESTION DES FICHIER MP3 DES PROTOCOLES
+	public function insererProtocoleMp3($titre , $nom, $id_admission, $id_employe){
+	    $db = $this->tableGateway->getAdapter();
+	    $sql = new Sql($db);
+	    $sQuery = $sql->insert()
+	    ->into('fichier_mp3_protocole')
+	    ->columns(array('titre', 'nom', 'id_admission'))
+	    ->values(array('titre' => $titre , 'nom' => $nom, 'id_admission'=>$id_admission, 'id_employe'=>$id_employe));
+	
+	    return $sql->prepareStatementForSqlObject($sQuery)->execute();
+	}
+	
+	public function getProtocoleMp3($id_admission){
+	    $db = $this->tableGateway->getAdapter();
+	    $sql = new Sql($db);
+	    $sQuery = $sql->select()
+	    ->from(array('f' => 'fichier_mp3_protocole'))->columns(array('*'))
+	    ->where(array('id_admission' => $id_admission))
+	    ->order('id DESC');
+	
+	    $stat = $sql->prepareStatementForSqlObject($sQuery);
+	    $result = $stat->execute();
+	    return $result;
+	}
+	
+	public function supprimerProtocoleMp3($id, $id_admission){
+	    $liste = $this->getProtocoleMp3($id_admission);
+	
+	    $i=1;
+	    foreach ($liste as $list){
+	        if($i == $id){
+	            unlink($this->cheminBaseUrl().'public/audios/protocoles/'.$list['nom']);
+	
+	            $db = $this->tableGateway->getAdapter();
+	            $sql = new Sql($db);
+	            $sQuery = $sql->delete()
+	            ->from('fichier_mp3_protocole')
+	            ->where(array('id' => $list['id']));
+	
+	            $sql->prepareStatementForSqlObject($sQuery)->execute();
+	
+	            return true;
+	        }
+	        $i++;
+	    }
+	    return false;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	// GESTION DES ADMISSION PATIENTS SUR LE BLOB OPERATOIRE
+	// GESTION DES ADMISSION PATIENTS SUR LE BLOB OPERATOIRE
+	// GESTION DES ADMISSION PATIENTS SUR LE BLOB OPERATOIRE
+	public function getDemandeOperation($id_demande){
+		$db = $this->tableGateway->getAdapter();
+		$sql = new Sql($db);
+		$sQuery = $sql->select()
+		->from(array('demop' => 'demande_operation'))->columns(array('*'))
+		->where(array('id_demande_operation' => $id_demande));
+		return  $sql->prepareStatementForSqlObject($sQuery)->execute()->current();
+	}
 }

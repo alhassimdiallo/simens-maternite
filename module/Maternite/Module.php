@@ -75,7 +75,8 @@ use Maternite\Model\Reference;
 use Maternite\Model\ReferenceTable;
 use Maternite\Model\Grossesse;
 use Maternite\Model\GrossesseTable;
-
+use Maternite\Model\DevenirNouveauNe;
+use Maternite\Model\DevenirNouveauNeTable;
 use Maternite\Model\AntecedentType1;
 use Maternite\Model\AntecedentType1Table;
 use Maternite\Model\AntecedentType2;
@@ -300,7 +301,17 @@ class Module implements AutoloaderProviderInterface {
 							return new TableGateway ( 'enfant', $dbAdapter, null, $resultSetPrototype );
 						},
 						
-						
+						'Maternite\Model\DevenirNouveauNeTable' => function ($sm) {
+							$tableGateway = $sm->get( 'DevenirNouveauNeTableGateway' );
+							$table = new DevenirNouveauNeTable($tableGateway);
+							return $table;
+						},
+						'DevenirNouveauNeTableGateway' => function ($sm) {
+							$dbAdapter = $sm->get ( 'Zend\Db\Adapter\Adapter' );
+							$resultSetPrototype = new ResultSet ();
+							$resultSetPrototype->setArrayObjectPrototype (new DevenirNouveauNe());
+							return new TableGateway ( 'devenir_nouveau_ne', $dbAdapter, null, $resultSetPrototype );
+						},
 						'Maternite\Model\ConsultationMaterniteTable' => function ($sm) {
 							$tableGateway = $sm->get ( 'ConsultationMaterniteTableConsGateway' );
 							$table = new ConsultationMaterniteTable ( $tableGateway );
